@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>FITFUEL — Built by Varun & Jyothish</title>
+
+<style>
+:root{
+  --bg:#080808;
+  --surface:#111;
+  --surface2:#171717;
+  --surface3:#1d1d1d;
+  --border:#2d2d2d;
+  --text:#f5f5f5;
+  --muted:#999;
+  --accent:#ff6b00;
+  --accent2:#ff8d3d;
+  --green:#38d996;
+  --red:#ff5757;
+  --shadow:0 24px 70px rgba(0,0,0,.42);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 88% 0%,rgba(255,107,0,.11),transparent 25%),
+    radial-gradient(circle at 0% 35%,rgba(255,107,0,.045),transparent 22%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,92%);margin:auto}
+.hidden{display:none!important}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(8,8,8,.91);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px
+}
+.logo{font-size:25px;font-weight:950;letter-spacing:-1px;color:var(--accent)}
+.navlinks{display:flex;gap:22px}
+.navlinks a{font-size:13px;font-weight:800;color:#d6d6d6;transition:.2s}
+.navlinks a:hover{color:var(--accent)}
+.nav-actions{display:flex;gap:8px}
+.icon-btn,.cartbtn{
+  border:1px solid var(--border);background:#151515;color:#fff;
+  padding:10px 13px;border-radius:10px;font-weight:850
+}
+.cartbtn{background:var(--accent);border-color:var(--accent)}
+.menu-btn{display:none}
+
+/* HERO */
+.hero{
+  min-height:660px;
+  display:flex;align-items:center;
+  background:
+    linear-gradient(90deg,#050505 18%,rgba(5,5,5,.82) 48%,rgba(5,5,5,.35)),
+    url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1900&q=85")
+    center/cover;
+}
+.hero-content{max-width:740px;padding:82px 0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid #393939;background:rgba(17,17,17,.75);
+  border-radius:999px;padding:7px 11px;margin-bottom:18px;
+  color:#ddd;text-transform:uppercase;letter-spacing:1px;font-size:10px;font-weight:950
+}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.hero h1{
+  font-size:clamp(44px,7vw,78px);
+  line-height:.95;letter-spacing:-3px;margin-bottom:22px
+}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:19px;color:#c8c8c8;max-width:660px;margin-bottom:28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--accent);background:var(--accent);color:#fff;
+  padding:12px 18px;border-radius:10px;font-weight:900;transition:.2s
+}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.secondary{background:transparent;border-color:#555}
+.btn.ghost{background:#191919;border-color:#363636}
+.btn.small{padding:8px 11px;font-size:12px}
+.btn.danger{background:#281010;border-color:#5b2525;color:#ff9b9b}
+.btn.external{background:#151515;border-color:#3a3a3a}
+
+/* GENERAL */
+section{padding:82px 0;scroll-margin-top:78px}
+.title{text-align:center;margin-bottom:40px}
+.title h2{font-size:clamp(30px,4vw,43px);letter-spacing:-1.2px}
+.title p{color:var(--muted);margin-top:7px}
+.card,.formbox{
+  background:linear-gradient(180deg,#171717,#101010);
+  border:1px solid var(--border);
+  border-radius:17px;
+}
+.card{padding:22px}
+.formbox{padding:28px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+
+/* FEATURES */
+.feature-card{
+  min-height:245px;text-align:left;border:1px solid var(--border);
+  color:var(--text);position:relative;overflow:hidden;transition:.25s
+}
+.feature-card:hover{transform:translateY(-5px);border-color:#4d4d4d}
+.feature-card:after{
+  content:"";position:absolute;width:130px;height:130px;right:-50px;bottom:-60px;
+  border-radius:50%;background:rgba(255,107,0,.08)
+}
+.feature-icon{font-size:37px;margin-bottom:20px}
+.feature-card h3{font-size:19px;margin-bottom:8px}
+.feature-card p{font-size:13px;color:#999}
+.feature-link{margin-top:19px;color:var(--accent);font-size:12px;font-weight:950}
+
+/* FORM */
+.formgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.formgroup{margin-bottom:2px}
+label{display:block;color:#ccc;font-size:12px;font-weight:850;margin-bottom:7px}
+input,select{
+  width:100%;background:#0a0a0a;color:#fff;border:1px solid #3b3b3b;
+  padding:12px;border-radius:9px;outline:none
+}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,107,0,.1)}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.result{
+  margin-top:22px;background:#0b0b0b;border:1px solid #303030;
+  padding:22px;border-radius:14px
+}
+.statgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin-top:17px}
+.stat{
+  background:#171717;border:1px solid #292929;border-radius:11px;
+  padding:15px;text-align:center;color:#aaa;font-size:11px;font-weight:800
+}
+.stat strong{display:block;color:var(--accent);font-size:23px;line-height:1.1;margin-bottom:4px}
+.profile-note{
+  margin-top:15px;padding:12px;border:1px solid #2e2e2e;border-radius:10px;
+  color:#888;font-size:12px
+}
+
+/* WORKOUT */
+.workout-day{border:1px solid #2d2d2d;border-radius:14px;overflow:hidden;background:#111;margin-bottom:15px}
+.day-head{
+  background:#1b1b1b;padding:16px 18px;display:flex;
+  justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap
+}
+.day-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.badge{
+  display:inline-flex;background:#292929;border:1px solid #393939;color:#ddd;
+  padding:5px 9px;border-radius:999px;font-size:10px;font-weight:850
+}
+.day-progress{font-size:11px;color:#888}
+.exercise{
+  padding:14px 18px;border-top:1px solid #292929;
+  display:flex;align-items:center;justify-content:space-between;gap:15px
+}
+.exercise-main{display:flex;gap:11px;align-items:flex-start}
+.exercise-check{
+  appearance:none;width:19px;height:19px;background:#080808;border:1px solid #555;
+  border-radius:5px;position:relative;margin-top:2px;flex:none
+}
+.exercise-check:checked{background:var(--accent);border-color:var(--accent)}
+.exercise-check:checked:after{
+  content:"✓";position:absolute;inset:-1px 0 0;text-align:center;font-size:13px;font-weight:950
+}
+.exercise-name{font-weight:850}
+.exercise-meta{color:#888;font-size:11px;margin-top:2px}
+.exercise-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+
+/* DIET */
+.food{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:15px 0;border-bottom:1px solid #292929;cursor:pointer
+}
+.food:last-child{border-bottom:0}
+.food-name strong{display:block}.food-name span{color:#888;font-size:12px}
+.food-right{text-align:right;white-space:nowrap;color:#bbb;font-size:12px}
+.food-right span{color:var(--accent);font-size:11px;font-weight:850}
+.food.done{opacity:.45}.food.done .food-name{text-decoration:line-through}
+.diet-head{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+
+/* EXERCISE LIBRARY */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.toolbar input{max-width:370px}.toolbar select{max-width:190px}
+.exercise-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.exercise-card{display:flex;flex-direction:column;gap:8px}
+.exercise-card .icon{font-size:29px}
+.exercise-card .target{color:#888;font-size:12px}
+.exercise-card .video-button{margin-top:auto}
+
+/* TIMER */
+.timer-box{text-align:center}
+.timer-ring{
+  width:215px;height:215px;border-radius:50%;margin:7px auto 22px;
+  display:grid;place-items:center;
+  background:conic-gradient(var(--accent) 360deg,#2a2a2a 0deg);
+  box-shadow:0 0 0 10px #101010,0 0 0 11px #2b2b2b
+}
+.timer-inner{
+  width:182px;height:182px;border-radius:50%;background:#0d0d0d;
+  display:grid;place-items:center
+}
+.timer-number{font-size:48px;font-weight:950;letter-spacing:-2px}
+.timer-status{color:#888;font-size:11px}
+.timer-presets,.timer-controls,.timer-custom{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px
+}
+.timer-custom input{max-width:145px}
+
+/* PROGRESS */
+.progress-layout{display:grid;grid-template-columns:.9fr 1.5fr;gap:18px}
+.progress-history{margin-top:20px}
+.progress-row{
+  display:grid;grid-template-columns:1fr .7fr .7fr .7fr auto;gap:8px;
+  align-items:center;padding:12px 0;border-bottom:1px solid #292929;font-size:12px
+}
+.progress-row small{color:#777}
+.canvas-wrap{background:#0b0b0b;border:1px solid #292929;border-radius:14px;padding:18px}
+#progressChart{width:100%;height:320px;display:block}
+
+/* STORE */
+.recommendation{
+  margin-bottom:18px;padding:17px;border:1px solid #493021;
+  background:linear-gradient(90deg,rgba(255,107,0,.11),rgba(255,107,0,.025));
+  border-radius:13px
+}
+.recommendation strong{color:var(--accent)}
+.recommendation p{color:#999;font-size:12px;margin-top:5px}
+.product-card{overflow:hidden}
+.product-art{
+  height:170px;border-radius:11px;margin-bottom:15px;
+  display:grid;place-items:center;font-size:65px;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,107,0,.22),transparent 36%),
+    linear-gradient(135deg,#222,#0b0b0b);
+  border:1px solid #292929
+}
+.product-card h3{font-size:16px}
+.product-card .price{font-size:19px;font-weight:950;color:var(--accent);margin:7px 0}
+.product-card .tag{font-size:11px;color:#888;min-height:34px}
+.product-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.product-actions .btn{flex:1}
+
+/* MODAL / YOUTUBE */
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.89);backdrop-filter:blur(9px);
+  display:none;align-items:center;justify-content:center;padding:18px;z-index:3000
+}
+.modal.open{display:flex}
+.modalbox{
+  width:min(1000px,100%);max-height:94vh;overflow:auto;
+  background:#151515;border:1px solid #383838;border-radius:17px;box-shadow:var(--shadow)
+}
+.modal-header{
+  display:flex;justify-content:space-between;align-items:center;gap:15px;
+  padding:16px 20px;border-bottom:1px solid #292929
+}
+.close{
+  width:38px;height:38px;border:1px solid #393939;background:#222;color:#fff;
+  border-radius:9px;font-size:22px
+}
+.video-wrap{position:relative;aspect-ratio:16/9;background:#000}
+.video-wrap iframe{width:100%;height:100%;display:block;border:0}
+.video-error{
+  position:absolute;inset:0;display:none;place-items:center;text-align:center;
+  padding:25px;background:#090909;color:#aaa
+}
+.video-error.show{display:grid}
+.video-error strong{color:#fff;display:block;margin-bottom:6px}
+.modal-body{padding:19px}
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.guide-tip{background:#101010;border:1px solid #292929;padding:14px;border-radius:11px}
+.guide-tip strong{display:block;margin-bottom:5px}.guide-tip span{font-size:12px;color:#999}
+.video-note{
+  margin-top:13px;padding:12px;background:#0e0e0e;border:1px solid #292929;
+  border-radius:10px;color:#888;font-size:11px
+}
+
+/* CART */
+.cart{
+  position:fixed;right:-440px;top:0;width:420px;height:100%;z-index:4000;
+  background:#111;border-left:1px solid #2b2b2b;padding:23px;
+  transition:.3s;box-shadow:-20px 0 60px rgba(0,0,0,.65);overflow:auto
+}
+.cart.open{right:0}
+.cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.cart-item{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:14px 0;border-bottom:1px solid #2c2c2c
+}
+.cart-item small{color:#888}
+.cart-footer{margin-top:20px}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:950}
+.empty{text-align:center;color:#777;padding:28px 8px}
+
+/* TOAST / FOOTER */
+.toast{
+  position:fixed;right:20px;bottom:20px;z-index:5000;background:#181818;
+  border:1px solid #3a3a3a;padding:12px 15px;border-radius:10px;
+  opacity:0;transform:translateY(15px);pointer-events:none;transition:.25s;font-size:12px
+}
+.toast.show{opacity:1;transform:translateY(0)}
+footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-logo{color:var(--accent);font-weight:950;font-size:21px}
+
+@media(max-width:1050px){
+  .grid,.exercise-grid{grid-template-columns:repeat(2,1fr)}
+  .formgrid{grid-template-columns:repeat(2,1fr)}
+  .statgrid{grid-template-columns:repeat(3,1fr)}
+  .progress-layout{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .navlinks{display:none}.menu-btn{display:block}
+  .hero{min-height:590px}.hero h1{letter-spacing:-2px}
+  .grid,.exercise-grid,.formgrid{grid-template-columns:1fr}
+  .statgrid{grid-template-columns:repeat(2,1fr)}
+  .exercise{flex-direction:column;align-items:flex-start}
+  .exercise-actions{justify-content:flex-start}
+  .guide-grid{grid-template-columns:1fr}
+  .cart{width:100%;right:-100%}
+}
+
+/* LIVE AI REP TRACKER */
+.live-modal{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:5000;display:none;align-items:center;justify-content:center;padding:16px}
+.live-modal.open{display:flex}.live-box{width:min(1100px,100%);max-height:96vh;overflow:auto;background:#111;border:1px solid #383838;border-radius:18px}
+.live-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #292929}
+.live-content{display:grid;grid-template-columns:1.45fr .75fr;gap:18px;padding:18px}.camera-card{background:#080808;border:1px solid #292929;border-radius:14px;overflow:hidden}
+#cameraVideo{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;transform:scaleX(-1);background:#050505}
+.camera-status{padding:10px 14px;color:#aaa;font-size:12px;border-top:1px solid #292929}.live-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.live-stat{background:#181818;border:1px solid #292929;border-radius:12px;padding:14px;text-align:center}.live-stat strong{display:block;font-size:32px;color:var(--accent)}
+.live-panel{background:#151515;border:1px solid #292929;border-radius:14px;padding:16px}.live-panel h3{margin-bottom:10px} .spotify-box{margin-top:14px;background:#0b0b0b;border:1px solid #292929;border-radius:12px;padding:12px}
+.spotify-box iframe{width:100%;height:152px;border:0;border-radius:10px;background:#080808}
+.spotify-song-picker{margin:10px 0 12px;max-height:180px;overflow-y:auto;border:1px solid #292929;border-radius:10px;background:#111}
+.spotify-song{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;padding:10px 11px;border:0;border-bottom:1px solid #242424;background:#111;color:#ddd}
+.spotify-song:last-child{border-bottom:0}
+.spotify-song:hover{background:#1b1b1b}
+.spotify-song.active{background:rgba(255,107,0,.12);color:#fff;border-left:3px solid var(--accent)}
+.spotify-song strong{font-size:12px}.spotify-song span{font-size:10px;color:#777}
+.spotify-song .play-label{color:var(--accent);font-weight:900;white-space:nowrap}
+.spotify-now-playing{font-size:11px;color:#aaa;margin:7px 0 10px;padding:8px 10px;border:1px solid #292929;border-radius:8px;background:#101010}
+.warning{color:#ffb08a;font-size:11px;line-height:1.5;margin-top:10px}
+@media(max-width:800px){.live-content{grid-template-columns:1fr}.live-modal{padding:8px}}
+
+/* =========================================================
+   OPENING CREDIT SCREEN
+   ========================================================= */
+.opening-credit{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,107,0,.14),transparent 28%),
+    #080808;
+  transition:opacity .65s ease,visibility .65s ease;
+}
+.opening-credit.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.opening-credit-inner{
+  width:min(760px,90%);
+  padding:40px 20px;
+  animation:creditIn .75s ease both;
+}
+.opening-mark{
+  width:82px;
+  height:82px;
+  margin:0 auto 22px;
+  display:grid;
+  place-items:center;
+  border-radius:24px;
+  background:linear-gradient(135deg,#ff6b00,#ff9b52);
+  color:#fff;
+  font-size:24px;
+  font-weight:950;
+  letter-spacing:-1px;
+  box-shadow:0 20px 70px rgba(255,107,0,.28);
+}
+.opening-kicker{
+  color:#aaa;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:4px;
+  margin-bottom:13px;
+}
+.opening-credit h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(32px,6vw,64px);
+  line-height:1;
+  letter-spacing:-2.5px;
+  font-weight:950;
+}
+.opening-credit h1 span{color:#ff6b00}
+.opening-credit p{
+  color:#aaa;
+  margin:16px 0 0;
+  font-size:14px;
+}
+.opening-line{
+  width:110px;
+  height:2px;
+  margin:24px auto 16px;
+  background:linear-gradient(90deg,#ff6b00,#ff9b52);
+}
+.opening-credit small{
+  color:#666;
+  font-size:10px;
+  letter-spacing:.7px;
+}
+@keyframes creditIn{
+  from{opacity:0;transform:translateY(18px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     OPENING CREDIT — BUILT BY VARUN & JYOTHISH
+     ========================================================= -->
+<div id="openingCredit" class="opening-credit">
+  <div class="opening-credit-inner">
+    <div class="opening-mark">FF</div>
+    <div class="opening-kicker">FITFUEL</div>
+    <h1>BUILT BY <span>VARUN</span> &amp; <span>JYOTHISH</span></h1>
+    <p>Personal Fitness &amp; Cycling Fuel Dashboard</p>
+    <div class="opening-line"></div>
+    <small>Loading your fitness experience…</small>
+  </div>
+</div>
+
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">FITFUEL</a>
+
+    <div class="navlinks">
+      <a href="#home">Home</a>
+      <a href="#fitness">Fitness</a>
+      <a href="#profile">Plan</a>
+      <a href="#diet">Diet</a>
+      <a href="#exerciseLibrary">Guides</a>
+      <a href="#progress">Progress</a>
+      <a href="#store">Store</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn menu-btn" onclick="scrollToId('fitness')">☰</button>
+      <button class="cartbtn" onclick="toggleCart()">🛒 Cart <span id="cartCount">0</span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <div class="eyebrow"><i></i> Personal fitness + cycling fuel</div>
+      <h1>BUILD YOUR <span>BEST</span> VERSION.</h1>
+      <p>
+        Personalized training, diet targets, progress tracking and embedded exercise guides —
+        with MuscleBlaze cycling/endurance fuel recommendations matched to each member's diet.
+      </p>
+      <div class="hero-actions">
+        <button class="btn" onclick="scrollToId('profile')">Create My Plan →</button>
+        <button class="btn secondary" onclick="scrollToId('store')">View My Fuel</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="fitness">
+  <div class="container">
+    <div class="title">
+      <h2>Fitness Features</h2>
+      <p>Each card is connected to a working section of the dashboard.</p>
+    </div>
+
+    <div class="grid">
+      <button class="card feature-card" onclick="scrollToId('profile')">
+        <div class="feature-icon">🏋️</div>
+        <h3>Personal Workout</h3>
+        <p>Generate a training split from the member's goal and available training days.</p>
+        <div class="feature-link">Create plan →</div>
+      </button>
+
+      <button class="card feature-card" onclick="scrollToId('exerciseLibrary')">
+        <div class="feature-icon">🎬</div>
+        <h3>Exercise Guide</h3>
+        <p>Open a YouTube exercise tutorial inside FITFUEL without navigating away.</p>
+        <div class="feature-link">Open guides →</div>
+      </button>
+
+      <button class="card feature-card" onclick="scrollToId('progress')">
+        <div class="feature-icon">📈</div>
+        <h3>Progress Tracking</h3>
+        <p>Save body measurements and visualize the member's weight trend on one canvas.</p>
+        <div class="feature-link">Track progress →</div>
+      </button>
+
+      <button class="card feature-card" onclick="scrollToId('timerSection')">
+        <div class="feature-icon">🔥</div>
+        <h3>Workout Timer</h3>
+        <p>Use rest presets or set a custom timer with pause, resume and reset.</p>
+        <div class="feature-link">Start timer →</div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="container">
+    <div class="title">
+      <h2>Create Your Fitness Plan</h2>
+      <p>The diet selection is also used to customize the MuscleBlaze store.</p>
+    </div>
+
+    <div class="formbox">
+      <div class="formgrid">
+        <div class="formgroup"><label>Name</label><input id="name" placeholder="Your name"></div>
+        <div class="formgroup"><label>Age</label><input id="age" type="number" min="13" max="100" placeholder="21"></div>
+
+        <div class="formgroup">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div class="formgroup"><label>Height (cm)</label><input id="height" type="number" placeholder="170"></div>
+        <div class="formgroup"><label>Weight (kg)</label><input id="weight" type="number" step=".1" placeholder="60"></div>
+
+        <div class="formgroup">
+          <label>Goal</label>
+          <select id="goal">
+            <option value="muscle">Muscle Gain</option>
+            <option value="fatloss">Fat Loss</option>
+            <option value="strength">Strength</option>
+            <option value="maintain">Maintenance</option>
+          </select>
+        </div>
+
+        <div class="formgroup">
+          <label>Workout Days</label>
+          <select id="days">
+            <option value="3">3 Days</option>
+            <option value="4">4 Days</option>
+            <option value="5" selected>5 Days</option>
+            <option value="6">6 Days</option>
+          </select>
+        </div>
+
+        <div class="formgroup">
+          <label>Diet</label>
+          <select id="dietType">
+            <option>Non-Vegetarian</option>
+            <option>Vegetarian</option>
+            <option>Eggitarian</option>
+            <option>Vegan</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="generatePlan()">Generate My Plan</button>
+        <button class="btn ghost" onclick="clearProfile()">Reset</button>
+      </div>
+
+      <div id="planResult" class="result" style="display:none"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKOUT -->
+<section id="workout">
+  <div class="container">
+    <div class="title">
+      <h2>Weekly Workout</h2>
+      <p id="workoutSubtitle">Generate your profile above to create the schedule.</p>
+    </div>
+    <div id="workoutPlan">
+      <div class="empty">Your personalized workout will appear here.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIET -->
+<section id="diet">
+  <div class="container">
+    <div class="title">
+      <h2>Personalized Diet</h2>
+      <p>Meal choices change according to the member's selected diet.</p>
+    </div>
+
+    <div id="dietPlan" class="formbox">
+      <div class="empty">Generate your profile above to create the nutrition plan.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXERCISE LIBRARY -->
+<section id="exerciseLibrary">
+  <div class="container">
+    <div class="title">
+      <h2>Exercise Video Guides</h2>
+      <p>Videos open in a FITFUEL popup — the main page stays open.</p>
+    </div>
+
+    <div class="toolbar">
+      <input id="exerciseSearch" placeholder="Search exercises..." oninput="renderExerciseLibrary()">
+      <select id="muscleFilter" onchange="renderExerciseLibrary()">
+        <option value="all">All muscle groups</option>
+        <option>Chest</option>
+        <option>Back</option>
+        <option>Legs</option>
+        <option>Shoulders</option>
+        <option>Biceps</option>
+        <option>Triceps</option>
+        <option>Hamstrings</option>
+      </select>
+    </div>
+
+    <div class="exercise-grid" id="exerciseLibraryGrid"></div>
+  </div>
+</section>
+
+<!-- TIMER -->
+<section id="timerSection">
+  <div class="container">
+    <div class="title">
+      <h2>Workout Timer</h2>
+      <p>Use it between sets without leaving FITFUEL.</p>
+    </div>
+
+    <div class="formbox timer-box">
+      <div class="timer-ring" id="timerRing">
+        <div class="timer-inner">
+          <div>
+            <div class="timer-number" id="timerNumber">01:00</div>
+            <div class="timer-status" id="timerStatus">Ready</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timer-presets">
+        <button class="btn small ghost" onclick="setTimer(30)">30 sec</button>
+        <button class="btn small ghost" onclick="setTimer(60)">60 sec</button>
+        <button class="btn small ghost" onclick="setTimer(90)">90 sec</button>
+        <button class="btn small ghost" onclick="setTimer(120)">120 sec</button>
+        <button class="btn small ghost" onclick="setTimer(180)">180 sec</button>
+      </div>
+
+      <div class="timer-custom">
+        <input id="customSeconds" type="number" min="5" max="3600" placeholder="Custom seconds">
+        <button class="btn small" onclick="setCustomTimer()">Set</button>
+      </div>
+
+      <div class="timer-controls">
+        <button class="btn" id="timerStartBtn" onclick="toggleTimer()">Start</button>
+        <button class="btn ghost" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS -->
+<section id="progress">
+  <div class="container">
+    <div class="title">
+      <h2>Progress Tracker</h2>
+      <p>Save measurements and visualize the weight trend on one canvas.</p>
+    </div>
+
+    <div class="progress-layout">
+      <div class="formbox">
+        <h3>New Progress Entry</h3>
+        <p style="color:#777;font-size:11px;margin:5px 0 20px">Stored locally in this browser.</p>
+
+        <div class="formgrid" style="grid-template-columns:1fr 1fr">
+          <div class="formgroup"><label>Weight (kg)</label><input id="progressWeight" type="number" step=".1"></div>
+          <div class="formgroup"><label>Chest (cm)</label><input id="chest" type="number" step=".1"></div>
+          <div class="formgroup"><label>Waist (cm)</label><input id="waist" type="number" step=".1"></div>
+          <div class="formgroup"><label>Arms (cm)</label><input id="arms" type="number" step=".1"></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" onclick="saveProgress()">Save Progress</button>
+          <button class="btn danger" onclick="clearProgress()">Clear History</button>
+        </div>
+
+        <div id="progressHistory" class="progress-history"></div>
+      </div>
+
+      <div class="canvas-wrap">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:12px">
+          <div>
+            <h3>Weight Trend</h3>
+            <p style="font-size:11px;color:#777">Single HTML canvas</p>
+          </div>
+          <span class="badge" id="progressCount">0 entries</span>
+        </div>
+        <canvas id="progressChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORE -->
+<section id="store">
+  <div class="container">
+    <div class="title">
+      <h2>Personalized MuscleBlaze Store</h2>
+      <p>Every member receives cycling/endurance fuel plus diet-appropriate nutrition recommendations.</p>
+    </div>
+
+    <div id="storeRecommendation"></div>
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-logo">FITFUEL</div>
+      <p>Train. Eat. Ride. Recover. Repeat.</p>
+    </div>
+    <p>© 2026 FITFUEL. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="modal" id="videoModal" onclick="closeModalOnBackdrop(event)">
+  <div class="modalbox">
+    <div class="modal-header">
+      <div>
+        <h3 id="videoTitle">Exercise Guide</h3>
+        <p id="videoSubtitle" style="color:#777;font-size:11px"></p>
+      </div>
+      <button class="close" onclick="closeVideoModal()">×</button>
+    </div>
+
+    <div class="video-wrap">
+      <iframe
+        id="videoFrame"
+        title="FITFUEL Exercise Guide"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+      <div class="video-error" id="videoError">
+        <div>
+          <strong>Embedded video could not be loaded.</strong>
+          <span>
+            Your browser/hosting environment may be blocking YouTube's embedded player.
+            The FITFUEL page is still open and no automatic redirect is performed.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="guide-grid" id="guideTips"></div>
+
+      <div class="video-note">
+        <strong style="color:#ddd">YouTube embed fix included:</strong>
+        the code uses the official <code>/embed/VIDEO_ID</code> player, a valid 11-character
+        video ID, strict cross-origin referrer policy, playsinline support and an origin parameter
+        when the site is hosted over HTTP/HTTPS.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- LIVE CAMERA / REP TRACKER -->
+<div class="live-modal" id="liveModal">
+  <div class="live-box">
+    <div class="live-head">
+      <div>
+        <h2 id="liveTitle">Exercise Tracker</h2>
+        <p id="liveSubtitle" style="color:#777;font-size:11px">Camera-based rep counting</p>
+      </div>
+      <button class="close" onclick="stopExerciseTracker()">×</button>
+    </div>
+    <div class="live-content">
+      <div class="camera-card">
+        <video id="cameraVideo" autoplay muted playsinline></video>
+        <div class="camera-status" id="cameraStatus">Camera is off.</div>
+      </div>
+      <div>
+        <div class="live-stats">
+          <div class="live-stat"><strong id="liveReps">0</strong>REPS</div>
+          <div class="live-stat"><strong id="liveTarget">0</strong>TARGET</div>
+        </div>
+        <div class="live-panel">
+          <h3 id="livePhase">Ready</h3>
+          <p id="liveInstruction" style="color:#aaa;font-size:12px">Allow camera access and position your full body in frame.</p>
+          <div class="actions">
+            <button class="btn" id="cameraStartBtn" onclick="enableExerciseCamera()">Enable Camera</button>
+            <button class="btn ghost" onclick="stopExerciseTracker()">Stop</button>
+          </div>
+          <div class="spotify-box">
+            <strong>🎵 Spotify Workout Music</strong>
+            <p style="color:#777;font-size:11px;margin:5px 0 9px">
+              Scroll through the workout songs below and select any track. The selected song opens
+              directly in the Spotify player inside FITFUEL.
+            </p>
+            <div class="spotify-now-playing" id="spotifyNowPlaying">No song selected</div>
+            <div class="spotify-song-picker" id="spotifySongPicker"></div>
+            <iframe id="spotifyPlayer" title="Spotify workout music"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="eager"></iframe>
+          </div>
+          <div class="warning">
+            Rep tracking is an experimental computer-vision feature. Keep the camera unobstructed,
+            use safe form, and stop if the counter behaves incorrectly.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart" id="cart">
+  <div class="cart-head">
+    <h2>Your Cart</h2>
+    <button class="close" onclick="toggleCart()">×</button>
+  </div>
+
+  <div id="cartItems"></div>
+
+  <div class="cart-footer">
+    <div class="total"><span>Total</span><span>₹<span id="cartTotal">0</span></span></div>
+    <button class="btn" style="width:100%;margin-top:15px" onclick="checkout()">Checkout</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+<script>
+"use strict";
+
+/* =========================================================
+   OPENING CREDIT — AUTO ENTER
+   ========================================================= */
+window.addEventListener("load",()=>{
+  const credit=document.getElementById("openingCredit");
+  if(!credit) return;
+  setTimeout(()=>credit.classList.add("hide"),1800);
+  setTimeout(()=>credit.remove(),2500);
+});
+
+
+/* =========================================================
+   STORAGE + STATE
+   ========================================================= */
+let userPlan = JSON.parse(localStorage.getItem("fitfuelUser") || "null") || {};
+let cart = JSON.parse(localStorage.getItem("fitfuelCart") || "[]");
+let progress = JSON.parse(localStorage.getItem("fitfuelProgress") || "[]");
+let completedExercises = JSON.parse(localStorage.getItem("fitfuelCompleted") || "{}");
+let completedMeals = JSON.parse(localStorage.getItem("fitfuelMeals") || "{}");
+
+let timerInterval = null;
+let timerDuration = 60;
+let timerRemaining = 60;
+let timerRunning = false;
+let videoTimeout = null;
+let poseTracker = null;
+let cameraStream = null;
+let cameraRunning = false;
+let liveExercise = null;
+let liveReps = 0;
+let liveTarget = 10;
+let livePhase = "ready";
+let spotifyTrack = "37i9dQZF1DX76Wlfdnj7AP";
+let selectedSpotifySong = null;
+
+const spotifySongs = [
+  {id:"2KH16WveTQWT6KOG9Rg6e2", title:"Eye of the Tiger", artist:"Survivor"},
+  {id:"0pqnGHJpmpxLKifKRmU6WP", title:"Believer", artist:"Imagine Dragons"},
+  {id:"5Z01UMMf7V1o0MzF86s6WJ", title:"Lose Yourself", artist:"Eminem"},
+  {id:"4xkOaSrkexMciUUogZKVTS", title:"Till I Collapse", artist:"Eminem"},
+  {id:"3bidbhpOYeV4knp8AIu8Xn", title:"Can't Hold Us", artist:"Macklemore & Ryan Lewis"},
+  {id:"60nZcImufyMA1MKQY3dcCH", title:"Stronger", artist:"Kanye West"},
+  {id:"6Qyc6fS4DsZjB2mRW9DsQs", title:"Thunderstruck", artist:"AC/DC"},
+  {id:"7ouMYWpwJ422jRcDASZB7P", title:"The Pretender", artist:"Foo Fighters"},
+  {id:"1lATXTBJDHwawvT1UoO8Zy", title:"Remember the Name", artist:"Fort Minor"},
+  {id:"6habFhsOp2NvshLv26DqMb", title:"Pump It", artist:"The Black Eyed Peas"}
+];
+
+
+/* =========================================================
+   EXERCISE DATA
+   IMPORTANT:
+   - video must be ONLY the 11-character YouTube video ID.
+   - showExercise() converts it into an official /embed/ URL.
+   - This avoids the old /watch?v= URL being loaded into an iframe.
+   ========================================================= */
+const exercises = [
+  {
+    name:"Barbell Bench Press", muscle:"Chest", prescription:"4 × 8–10",
+    video:"hWbUlkb5Ms4",
+    tips:[
+      ["Setup","Retract the shoulder blades and keep the feet planted."],
+      ["Bar path","Lower the bar with control toward the lower chest."],
+      ["Safety","Use a manageable load and a spotter for heavy sets."]
+    ]
+  },
+  {
+    name:"Incline Dumbbell Press", muscle:"Chest", prescription:"3 × 10–12",
+    video:"8iPEnn-ltC8",
+    tips:[
+      ["Bench","Use a moderate incline rather than an excessively steep angle."],
+      ["Control","Lower the dumbbells slowly and keep wrists stacked."],
+      ["Finish","Press without aggressively smashing the dumbbells together."]
+    ]
+  },
+  {
+    name:"Cable Fly", muscle:"Chest", prescription:"3 × 12–15",
+    video:"kZJZWtfNpVI",
+    tips:[
+      ["Position","Keep a stable stance and a soft bend in the elbows."],
+      ["Range","Use a comfortable range without forcing the shoulders."],
+      ["Tempo","Control both the squeeze and the return."]
+    ]
+  },
+  {
+    name:"Lat Pulldown", muscle:"Back", prescription:"4 × 8–12",
+    video:"O94yEoGXtBY",
+    tips:[
+      ["Grip","Use a comfortable grip and keep the torso stable."],
+      ["Pull","Drive the elbows down rather than yanking with the hands."],
+      ["Return","Allow a controlled stretch at the top."]
+    ]
+  },
+  {
+    name:"Barbell Row", muscle:"Back", prescription:"3 × 8–10",
+    video:"axoeDmW0oAY",
+    tips:[
+      ["Hinge","Keep a stable torso and neutral spine."],
+      ["Pull","Bring the bar toward the lower torso."],
+      ["Control","Avoid using excessive momentum."]
+    ]
+  },
+  {
+    name:"Seated Cable Row", muscle:"Back", prescription:"3 × 10–12",
+    video:"GZbfZ033f74",
+    tips:[
+      ["Posture","Stay tall with a stable torso."],
+      ["Pull","Lead with the elbows and squeeze the upper back."],
+      ["Return","Let the shoulders move naturally into the stretch."]
+    ]
+  },
+  {
+    name:"Barbell Squat", muscle:"Legs", prescription:"4 × 6–10",
+    video:"bEv6CCg2BC8",
+    tips:[
+      ["Brace","Create a strong brace before each repetition."],
+      ["Depth","Use a depth you can control safely."],
+      ["Drive","Keep the feet stable and drive through the floor."]
+    ]
+  },
+  {
+    name:"Leg Press", muscle:"Legs", prescription:"3 × 10–12",
+    video:"didU4ZwAkPI",
+    tips:[
+      ["Setup","Position the feet comfortably and keep the hips supported."],
+      ["Range","Lower under control without losing your position."],
+      ["Lockout","Avoid aggressive knee lockout at the top."]
+    ]
+  },
+  {
+    name:"Romanian Deadlift", muscle:"Hamstrings", prescription:"3 × 8–12",
+    video:"_oyxCn2iSjU",
+    tips:[
+      ["Hinge","Push the hips backward while keeping the spine stable."],
+      ["Bar path","Keep the load close to the legs."],
+      ["Finish","Stand tall by driving the hips forward."]
+    ]
+  },
+  {
+    name:"Barbell Curl", muscle:"Biceps", prescription:"3 × 10–12",
+    video:"i1YgFZB6alI",
+    tips:[
+      ["Elbows","Keep the elbows relatively stable."],
+      ["Curl","Move through the elbow joint without swinging."],
+      ["Lower","Control the eccentric phase."]
+    ]
+  },
+  {
+    name:"Hammer Curl", muscle:"Biceps", prescription:"3 × 10–12",
+    video:"Kd3tbUnbueU",
+    tips:[
+      ["Grip","Use a neutral grip with palms facing each other."],
+      ["Posture","Keep the torso still."],
+      ["Tempo","Avoid throwing the dumbbells upward."]
+    ]
+  },
+  {
+    name:"Triceps Pushdown", muscle:"Triceps", prescription:"3 × 10–15",
+    video:"ek-UELpEsLI",
+    tips:[
+      ["Elbows","Keep elbows close to the sides."],
+      ["Push","Extend the elbows without swinging the torso."],
+      ["Return","Let the cable return under control."]
+    ]
+  },
+  {
+    name:"Overhead Triceps Extension", muscle:"Triceps", prescription:"3 × 10–12",
+    video:"38QQai2Ag9Y",
+    tips:[
+      ["Position","Keep the upper arms stable."],
+      ["Range","Use a comfortable stretch behind the head."],
+      ["Finish","Extend the elbows smoothly."]
+    ]
+  },
+  {
+    name:"Shoulder Press", muscle:"Shoulders", prescription:"4 × 8–12",
+    video:"_RlRDWO2jfg",
+    tips:[
+      ["Brace","Keep the torso controlled."],
+      ["Press","Drive the weight upward without excessive back arch."],
+      ["Lower","Return under control."]
+    ]
+  },
+  {
+    name:"Lateral Raise", muscle:"Shoulders", prescription:"3 × 12–15",
+    video:"v_ZkxWzYnMc",
+    tips:[
+      ["Load","Choose a weight you can control."],
+      ["Raise","Lead smoothly with the elbows."],
+      ["Tempo","Avoid swinging the body."]
+    ]
+  }
+];
+
+/* =========================================================
+   MUSCLEBLAZE STORE
+   Cycling/endurance fuel is shown for EVERY diet.
+   The protein recommendation changes according to diet.
+   Links point to official MuscleBlaze pages.
+   ========================================================= */
+const mbLinks = {
+  hydration:"https://www.muscleblaze.com/categories/pre-post-workout/electrolytes?navKey=CL-5716",
+  hydr8Pro:"https://www.muscleblaze.com/sv/muscleblaze-sports-hydr8-pro/SP-107210",
+  energyGel:"https://www.muscleblaze.com/sv/muscleblaze-sports-energy-gel/SP-126169",
+  whey:"https://www.muscleblaze.com/sv/muscleblaze-biozyme-performance-whey/SP-88093",
+  plant:"https://www.muscleblaze.com/brand/bgreen?navKey=BR-3369",
+  prepost:"https://www.muscleblaze.com/categories/pre-post-workout?navKey=CL-1709",
+  brand:"https://www.muscleblaze.com/"
+};
+
+const storeProducts = {
+  cycling: [
+    {
+      id:"hydr8-pro",
+      name:"MuscleBlaze Sports Hydr8 PRO",
+      icon:"💧",
+      tag:"Cycling / endurance hydration",
+      description:"Hydration-focused fuel for demanding training and endurance sessions.",
+      priceLabel:"View current price",
+      url:mbLinks.hydr8Pro
+    },
+    {
+      id:"energy-gel",
+      name:"MuscleBlaze Sports Energy Gel",
+      icon:"⚡",
+      tag:"Cycling / endurance energy",
+      description:"Convenient on-the-go sports fuel for longer or demanding sessions.",
+      priceLabel:"View current price",
+      url:mbLinks.energyGel
+    },
+    {
+      id:"hydr8",
+      name:"Fuel One Sports Hydr8",
+      icon:"🚴",
+      tag:"Cycling / training hydration",
+      description:"Electrolyte-focused hydration option for training sessions and sweaty rides.",
+      priceLabel:"View current price",
+      url:mbLinks.hydration
+    }
+  ],
+  protein: {
+    "Non-Vegetarian":{
+      name:"MuscleBlaze Biozyme Performance Whey",
+      icon:"🥛",
+      tag:"Diet match: Non-Vegetarian",
+      description:"Whey protein recommendation to complement a protein-focused diet.",
+      url:mbLinks.whey
+    },
+    "Vegetarian":{
+      name:"MuscleBlaze Biozyme Performance Whey",
+      icon:"🥛",
+      tag:"Diet match: Vegetarian",
+      description:"Dairy-based whey option for members whose vegetarian diet includes dairy.",
+      url:mbLinks.whey
+    },
+    "Eggitarian":{
+      name:"MuscleBlaze Biozyme Performance Whey",
+      icon:"🥚",
+      tag:"Diet match: Eggitarian",
+      description:"Whey protein option that can complement an egg-inclusive diet.",
+      url:mbLinks.whey
+    },
+    "Vegan":{
+      name:"MuscleBlaze bGREEN Plant Protein",
+      icon:"🌱",
+      tag:"Diet match: Vegan",
+      description:"Plant-based protein recommendation for a vegan member.",
+      url:mbLinks.plant
+    }
+  }
+};
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+function scrollToId(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function escapeHTML(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function toast(message){
+  const el=document.getElementById("toast");
+  el.textContent=message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer=setTimeout(()=>el.classList.remove("show"),2600);
+}
+
+/* =========================================================
+   PLAN GENERATION
+   ========================================================= */
+function generatePlan(){
+  const name=(document.getElementById("name").value||"Athlete").trim();
+  const age=Number(document.getElementById("age").value)||21;
+  const gender=document.getElementById("gender").value;
+  const height=Number(document.getElementById("height").value)||170;
+  const weight=Number(document.getElementById("weight").value)||60;
+  const goal=document.getElementById("goal").value;
+  const days=Number(document.getElementById("days").value);
+  const diet=document.getElementById("dietType").value;
+
+  let bmr=gender==="male"
+    ? (10*weight)+(6.25*height)-(5*age)+5
+    : (10*weight)+(6.25*height)-(5*age)-161;
+
+  let calories=bmr*1.55;
+  if(goal==="muscle") calories+=300;
+  if(goal==="fatloss") calories-=400;
+  if(goal==="strength") calories+=200;
+
+  let protein=(goal==="muscle"||goal==="strength") ? weight*1.8 : weight*1.6;
+  let carbs=(calories*.45)/4;
+  let fats=(calories*.25)/9;
+
+  userPlan={
+    name,age,gender,height,weight,goal,days,diet,
+    bmr:Math.round(bmr),
+    calories:Math.round(calories),
+    protein:Math.round(protein),
+    carbs:Math.round(carbs),
+    fats:Math.round(fats)
+  };
+
+  localStorage.setItem("fitfuelUser",JSON.stringify(userPlan));
+
+  document.getElementById("planResult").style.display="block";
+  document.getElementById("planResult").innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap">
+      <div>
+        <h2>Welcome, ${escapeHTML(name)}! 💪</h2>
+        <p style="color:#888;font-size:12px">Your plan and store recommendations have been customized.</p>
+      </div>
+      <span class="badge">${escapeHTML(diet)} • ${escapeHTML(goal)}</span>
+    </div>
+
+    <div class="statgrid">
+      <div class="stat"><strong>${Math.round(bmr)}</strong>BMR</div>
+      <div class="stat"><strong>${Math.round(calories)}</strong>Calories</div>
+      <div class="stat"><strong>${Math.round(protein)}g</strong>Protein</div>
+      <div class="stat"><strong>${Math.round(carbs)}g</strong>Carbs</div>
+      <div class="stat"><strong>${Math.round(fats)}g</strong>Fat</div>
+    </div>
+
+    <div class="profile-note">
+      <strong style="color:#ddd">Store personalization:</strong>
+      cycling/endurance hydration and energy products are shown for every member.
+      The protein recommendation is changed to match the selected diet.
+    </div>
+  `;
+
+  generateWorkout(days,goal);
+  generateDiet(userPlan);
+  renderStore();
+
+  document.getElementById("workoutSubtitle").textContent=
+    `${name}'s ${days}-day ${goal} training schedule`;
+
+  toast("Plan generated and MuscleBlaze store updated.");
+  setTimeout(()=>scrollToId("workout"),250);
+}
+
+function generateWorkout(days,goal){
+  let splits;
+
+  if(days===3){
+    splits=[
+      ["Day 1","Chest • Shoulders • Triceps",["Barbell Bench Press","Incline Dumbbell Press","Shoulder Press","Lateral Raise","Triceps Pushdown"]],
+      ["Day 2","Back • Biceps",["Lat Pulldown","Barbell Row","Seated Cable Row","Barbell Curl","Hammer Curl"]],
+      ["Day 3","Legs",["Barbell Squat","Leg Press","Romanian Deadlift"]]
+    ];
+  }else if(days===4){
+    splits=[
+      ["Day 1","Chest • Triceps",["Barbell Bench Press","Incline Dumbbell Press","Cable Fly","Triceps Pushdown"]],
+      ["Day 2","Back • Biceps",["Lat Pulldown","Barbell Row","Seated Cable Row","Barbell Curl"]],
+      ["Day 3","Legs",["Barbell Squat","Leg Press","Romanian Deadlift"]],
+      ["Day 4","Shoulders • Arms",["Shoulder Press","Lateral Raise","Hammer Curl","Overhead Triceps Extension"]]
+    ];
+  }else if(days===5){
+    splits=[
+      ["Day 1","Chest • Triceps",["Barbell Bench Press","Incline Dumbbell Press","Cable Fly","Triceps Pushdown"]],
+      ["Day 2","Back • Biceps",["Lat Pulldown","Barbell Row","Seated Cable Row","Barbell Curl"]],
+      ["Day 3","Legs",["Barbell Squat","Leg Press","Romanian Deadlift"]],
+      ["Day 4","Shoulders",["Shoulder Press","Lateral Raise"]],
+      ["Day 5","Arms • Core",["Barbell Curl","Hammer Curl","Triceps Pushdown","Overhead Triceps Extension"]]
+    ];
+  }else{
+    splits=[
+      ["Day 1","Chest • Triceps",["Barbell Bench Press","Incline Dumbbell Press","Cable Fly","Triceps Pushdown"]],
+      ["Day 2","Back • Biceps",["Lat Pulldown","Barbell Row","Seated Cable Row","Barbell Curl"]],
+      ["Day 3","Legs",["Barbell Squat","Leg Press","Romanian Deadlift"]],
+      ["Day 4","Chest • Shoulders",["Barbell Bench Press","Cable Fly","Shoulder Press","Lateral Raise"]],
+      ["Day 5","Back • Arms",["Lat Pulldown","Barbell Row","Hammer Curl","Triceps Pushdown"]],
+      ["Day 6","Legs • Core",["Barbell Squat","Leg Press","Romanian Deadlift"]]
+    ];
+  }
+
+  const container=document.getElementById("workoutPlan");
+
+  container.innerHTML=splits.map((day,dayIndex)=>{
+    const dayKey=`${userPlan.name||"member"}-${day[0]}`;
+    const completed=day[2].filter(ex=>completedExercises[`${dayKey}-${ex}`]).length;
+
+    return `
+      <div class="workout-day">
+        <div class="day-head">
+          <div class="day-title">
+            <strong>${day[0]}</strong>
+            <span class="badge">${day[1]}</span>
+          </div>
+          <span class="day-progress">${completed}/${day[2].length} completed</span>
+        </div>
+
+        ${day[2].map(ex=>{
+          const key=`${dayKey}-${ex}`;
+          const checked=completedExercises[key] ? "checked" : "";
+          const data=exercises.find(x=>x.name===ex);
+
+          return `
+            <div class="exercise">
+              <div class="exercise-main">
+                <input class="exercise-check"
+                  type="checkbox"
+                  ${checked}
+                  onchange="toggleExercise('${encodeURIComponent(key)}')">
+                <div>
+                  <div class="exercise-name">${escapeHTML(ex)}</div>
+                  <div class="exercise-meta">${escapeHTML(data?.prescription||"3–4 sets • 8–15 reps")} • 60–120 sec rest</div>
+                </div>
+              </div>
+
+              <div class="exercise-actions">
+                <button class="btn small" onclick="showExercise('${encodeURIComponent(ex)}')">🎬 Guide</button>
+                 <button class="btn small" onclick="startExerciseTracker('${encodeURIComponent(ex)}')">▶ Start</button>
+                <button class="btn small ghost" onclick="setTimer(90)">⏱ Rest</button>
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    `;
+  }).join("");
+}
+
+function toggleExercise(encodedKey){
+  const key=decodeURIComponent(encodedKey);
+  completedExercises[key]=!completedExercises[key];
+  localStorage.setItem("fitfuelCompleted",JSON.stringify(completedExercises));
+  generateWorkout(Number(userPlan.days)||5,userPlan.goal||"muscle");
+}
+
+/* =========================================================
+   DIET
+   ========================================================= */
+function generateDiet(plan){
+  let foods;
+
+  if(plan.diet==="Vegetarian"){
+    foods=[
+      ["Breakfast","Oats + Milk + Banana",500,20],
+      ["Snack","Peanuts + Fruit",300,12],
+      ["Lunch","Rice + Dal + Curd + Vegetables",650,25],
+      ["Snack","Paneer Sandwich",400,25],
+      ["Dinner","Roti + Paneer + Vegetables",600,30]
+    ];
+  }else if(plan.diet==="Vegan"){
+    foods=[
+      ["Breakfast","Oats + Soy Milk + Banana",500,22],
+      ["Snack","Peanuts + Fruit",300,12],
+      ["Lunch","Rice + Dal + Vegetables",650,25],
+      ["Snack","Plant Protein + Banana",300,25],
+      ["Dinner","Roti + Tofu + Vegetables",600,30]
+    ];
+  }else if(plan.diet==="Eggitarian"){
+    foods=[
+      ["Breakfast","Oats + Milk + Banana + Eggs",550,30],
+      ["Snack","Peanuts + Fruit",300,12],
+      ["Lunch","Rice + Eggs + Dal + Vegetables",650,30],
+      ["Snack","Whey Protein + Banana",300,27],
+      ["Dinner","Roti + Eggs + Curd + Vegetables",600,35]
+    ];
+  }else{
+    foods=[
+      ["Breakfast","Oats + Milk + Banana + Eggs",550,30],
+      ["Snack","Peanuts + Fruit",300,12],
+      ["Lunch","Rice + Chicken + Vegetables",700,45],
+      ["Snack","Whey Protein + Banana",300,27],
+      ["Dinner","Rice/Roti + Chicken + Curd",650,40]
+    ];
+  }
+
+  let totalCalories=foods.reduce((sum,f)=>sum+f[2],0);
+  let totalProtein=foods.reduce((sum,f)=>sum+f[3],0);
+
+  let html=`
+    <div class="diet-head">
+      <div>
+        <h2>Today's Nutrition Plan</h2>
+        <p style="color:#888;font-size:12px">${escapeHTML(plan.diet)} meal structure</p>
+      </div>
+      <span class="badge">${Math.round(totalCalories)} kcal listed</span>
+    </div>
+
+    <div class="statgrid">
+      <div class="stat"><strong>${plan.calories}</strong>Target kcal</div>
+      <div class="stat"><strong>${plan.protein}g</strong>Protein target</div>
+      <div class="stat"><strong>${plan.carbs}g</strong>Carbs target</div>
+      <div class="stat"><strong>${plan.fats}g</strong>Fat target</div>
+      <div class="stat"><strong>${totalProtein}g</strong>Listed protein</div>
+    </div>
+
+    <div style="margin-top:17px">
+      ${foods.map((f,index)=>{
+        const key=`${plan.name||"member"}-${f[0]}-${index}`;
+        const done=completedMeals[key];
+        return `
+          <div class="food ${done?"done":""}" onclick="toggleMeal('${encodeURIComponent(key)}')">
+            <div class="food-name">
+              <strong>${f[0]}</strong>
+              <span>${f[1]}</span>
+            </div>
+            <div class="food-right">
+              ${f[2]} kcal<br><span>${f[3]}g protein</span>
+            </div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+
+    <div class="profile-note">
+      <strong style="color:#ddd">Tap a meal</strong> to mark it complete for the current member.
+    </div>
+  `;
+
+  document.getElementById("dietPlan").innerHTML=html;
+}
+
+function toggleMeal(encodedKey){
+  const key=decodeURIComponent(encodedKey);
+  completedMeals[key]=!completedMeals[key];
+  localStorage.setItem("fitfuelMeals",JSON.stringify(completedMeals));
+  generateDiet(userPlan);
+}
+
+/* =========================================================
+   EXERCISE LIBRARY
+   ========================================================= */
+function renderExerciseLibrary(){
+  const search=(document.getElementById("exerciseSearch").value||"").toLowerCase().trim();
+  const muscle=document.getElementById("muscleFilter").value;
+
+  const filtered=exercises.filter(e=>{
+    const matchesSearch=!search ||
+      e.name.toLowerCase().includes(search) ||
+      e.muscle.toLowerCase().includes(search);
+    const matchesMuscle=muscle==="all" || e.muscle===muscle;
+    return matchesSearch && matchesMuscle;
+  });
+
+  const grid=document.getElementById("exerciseLibraryGrid");
+
+  if(!filtered.length){
+    grid.innerHTML=`<div class="empty" style="grid-column:1/-1">No exercises match your search.</div>`;
+    return;
+  }
+
+  grid.innerHTML=filtered.map(e=>`
+    <div class="card exercise-card">
+      <div class="icon">🏋️</div>
+      <h3>${escapeHTML(e.name)}</h3>
+      <div class="target">Target: ${escapeHTML(e.muscle)}</div>
+      <span class="badge">${escapeHTML(e.prescription)}</span>
+      <button class="btn video-button" onclick="showExercise('${encodeURIComponent(e.name)}')">🎬 Watch Guide</button>
+    </div>
+  `).join("");
+}
+
+/* =========================================================
+   YOUTUBE MODAL
+   ========================================================= */
+function buildYouTubeEmbed(videoId){
+  /*
+    FIX FOR THE OLD GUIDE ERROR:
+    1. Validate that the ID is exactly 11 YouTube characters.
+    2. Use /embed/VIDEO_ID instead of /watch?v=VIDEO_ID.
+    3. Add referrerpolicy to the iframe.
+    4. Add origin only when the page has a real HTTP/HTTPS origin.
+       This avoids sending origin=null when opening the HTML locally.
+  */
+  if(!/^[A-Za-z0-9_-]{11}$/.test(videoId)) return "";
+
+  const params=new URLSearchParams({
+    autoplay:"1",
+    rel:"0",
+    modestbranding:"1",
+    playsinline:"1"
+  });
+
+  if(location.protocol==="http:" || location.protocol==="https:"){
+    params.set("origin",location.origin);
+  }
+
+  return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+}
+
+function showExercise(encodedName){
+  const name=decodeURIComponent(encodedName);
+  const exercise=exercises.find(e=>e.name===name);
+  if(!exercise) return;
+
+  const modal=document.getElementById("videoModal");
+  const frame=document.getElementById("videoFrame");
+  const error=document.getElementById("videoError");
+
+  document.getElementById("videoTitle").textContent=exercise.name;
+  document.getElementById("videoSubtitle").textContent=
+    `${exercise.muscle} • ${exercise.prescription}`;
+
+  document.getElementById("guideTips").innerHTML=exercise.tips.map(t=>`
+    <div class="guide-tip">
+      <strong>${escapeHTML(t[0])}</strong>
+      <span>${escapeHTML(t[1])}</span>
+    </div>
+  `).join("");
+
+  error.classList.remove("show");
+
+  const src=buildYouTubeEmbed(exercise.video);
+
+  if(!src){
+    error.classList.add("show");
+    frame.removeAttribute("src");
+  }else{
+    frame.src=src;
+    /*
+      We do not redirect to YouTube.
+      If the browser blocks the embed, the user sees an in-page error instead.
+    */
+    clearTimeout(videoTimeout);
+    videoTimeout=setTimeout(()=>{
+      /* Keep the player visible; this only acts as a fallback message
+         for environments where an iframe never completes loading. */
+    },7000);
+  }
+
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeVideoModal(){
+  const modal=document.getElementById("videoModal");
+  const frame=document.getElementById("videoFrame");
+
+  clearTimeout(videoTimeout);
+  frame.src="";
+  modal.classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function closeModalOnBackdrop(event){
+  if(event.target.id==="videoModal") closeVideoModal();
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){ closeVideoModal(); stopExerciseTracker(); }
+});
+
+
+/* =========================================================
+   LIVE CAMERA + AI REP TRACKER
+   ========================================================= */
+const trackerRules={
+  "Barbell Bench Press":{target:10,kind:"bench",instruction:"Keep your upper body visible and perform controlled repetitions."},
+  "Incline Dumbbell Press":{target:10,kind:"press",instruction:"Keep both arms visible. Press up and lower under control."},
+  "Cable Fly":{target:12,kind:"fly",instruction:"Keep both arms visible and bring the hands together under control."},
+  "Lat Pulldown":{target:10,kind:"pulldown",instruction:"Keep your upper body visible. Pull down and return slowly."},
+  "Barbell Row":{target:10,kind:"row",instruction:"Keep your torso and arms visible. Row with controlled movement."},
+  "Seated Cable Row":{target:10,kind:"row",instruction:"Keep your torso and arms visible. Pull and return under control."},
+  "Barbell Squat":{target:10,kind:"squat",instruction:"Show your full body. Squat down and stand tall."},
+  "Leg Press":{target:10,kind:"squat",instruction:"Keep your lower body visible and perform controlled repetitions."},
+  "Romanian Deadlift":{target:10,kind:"hinge",instruction:"Show your full body. Hinge at the hips and stand tall."},
+  "Barbell Curl":{target:10,kind:"curl",instruction:"Keep one side clearly visible. Curl and lower under control."},
+  "Hammer Curl":{target:10,kind:"curl",instruction:"Keep one side clearly visible. Curl and lower under control."},
+  "Triceps Pushdown":{target:12,kind:"pushdown",instruction:"Keep your upper body and arms visible. Extend and return."},
+  "Overhead Triceps Extension":{target:10,kind:"overhead",instruction:"Keep your upper body and arms visible. Extend and return."},
+  "Shoulder Press":{target:10,kind:"press",instruction:"Keep your upper body visible. Press overhead and return."},
+  "Lateral Raise":{target:12,kind:"lateral",instruction:"Keep your upper body visible. Raise and lower your arms."}
+};
+
+function angle(a,b,c){
+  if(!a||!b||!c)return null;
+  const ab={x:a.x-b.x,y:a.y-b.y}, cb={x:c.x-b.x,y:c.y-b.y};
+  const dot=ab.x*cb.x+ab.y*cb.y;
+  const mag=Math.hypot(ab.x,ab.y)*Math.hypot(cb.x,cb.y);
+  return mag?Math.acos(Math.max(-1,Math.min(1,dot/mag)))*180/Math.PI:null;
+}
+function lm(p,i){return p?.[i]}
+function visible(p,i){return !!p?.[i]&&((p[i].visibility??1)>.45)}
+
+function getExerciseMetric(p,kind){
+  if(kind==="squat"){
+    if(!visible(p,23)||!visible(p,25)||!visible(p,27))return null;
+    return angle(lm(p,23),lm(p,25),lm(p,27));
+  }
+  if(kind==="hinge"){
+    if(!visible(p,11)||!visible(p,23)||!visible(p,25))return null;
+    return angle(lm(p,11),lm(p,23),lm(p,25));
+  }
+
+  const side=visible(p,13)&&visible(p,15)&&visible(p,11) ? "L" :
+             (visible(p,14)&&visible(p,16)&&visible(p,12) ? "R" : null);
+  if(!side)return null;
+
+  const shoulder=side==="L"?11:12;
+  const elbow=side==="L"?13:14;
+  const wrist=side==="L"?15:16;
+
+  if(kind==="lateral"){
+    const hip=side==="L"?23:24;
+    return angle(lm(p,elbow),lm(p,shoulder),lm(p,hip));
+  }
+  return angle(lm(p,shoulder),lm(p,elbow),lm(p,wrist));
+}
+
+function processRep(metric,kind){
+  if(metric==null)return;
+
+  let down=false,up=false;
+
+  if(kind==="squat"){down=metric<105;up=metric>155;}
+  else if(kind==="hinge"){down=metric<125;up=metric>160;}
+  else if(kind==="curl"){down=metric<75;up=metric>150;}
+  else if(kind==="lateral"){down=metric<25;up=metric>65;}
+  else {down=metric<75;up=metric>145;}
+
+  if(livePhase==="ready"||livePhase==="up"){
+    if(down)livePhase="down";
+  }else if(livePhase==="down"&&up){
+    liveReps++;
+    livePhase="up";
+    updateLiveUI();
+
+    if(liveReps>=liveTarget){
+      document.getElementById("cameraStatus").textContent=
+        "Target completed — camera stopping automatically.";
+      setTimeout(stopExerciseTracker,700);
+    }
+  }
+
+  document.getElementById("livePhase").textContent=livePhase.toUpperCase();
+}
+
+async function enableExerciseCamera(){
+  if(cameraRunning)return;
+
+  if(!navigator.mediaDevices?.getUserMedia){
+    document.getElementById("cameraStatus").textContent=
+      "Camera API unavailable. Use HTTPS or http://localhost.";
+    return;
+  }
+
+  const video=document.getElementById("cameraVideo");
+
+  try{
+    cameraStream=await navigator.mediaDevices.getUserMedia({
+      video:{facingMode:"user",width:{ideal:1280},height:{ideal:720}},
+      audio:false
+    });
+
+    video.srcObject=cameraStream;
+    await video.play();
+    cameraRunning=true;
+
+    document.getElementById("cameraStatus").textContent=
+      "Camera active • AI movement tracking…";
+    document.getElementById("cameraStartBtn").textContent="Camera Active";
+
+    if(!poseTracker){
+      poseTracker=new Pose({
+        locateFile:file=>`https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
+      });
+
+      poseTracker.setOptions({
+        modelComplexity:1,
+        smoothLandmarks:true,
+        minDetectionConfidence:.55,
+        minTrackingConfidence:.55
+      });
+
+      poseTracker.onResults(results=>{
+        if(!cameraRunning||!liveExercise)return;
+        const landmarks=results.poseLandmarks;
+        if(!landmarks)return;
+
+        const rule=trackerRules[liveExercise.name];
+        if(rule){
+          processRep(getExerciseMetric(landmarks,rule.kind),rule.kind);
+        }
+      });
+    }
+
+    const loop=async()=>{
+      if(!cameraRunning)return;
+      try{ await poseTracker.send({image:video}); }catch(e){}
+      if(cameraRunning)requestAnimationFrame(loop);
+    };
+
+    loop();
+  }catch(err){
+    document.getElementById("cameraStatus").textContent=
+      "Camera access failed: "+(err.name||"permission denied");
+    toast("Allow camera permission. Use HTTPS or localhost for camera access.");
+  }
+}
+
+function updateLiveUI(){
+  document.getElementById("liveReps").textContent=liveReps;
+  document.getElementById("liveTarget").textContent=liveTarget;
+}
+
+function startExerciseTracker(encodedName){
+  const name=decodeURIComponent(encodedName);
+  const rule=trackerRules[name];
+  if(!rule)return;
+
+  liveExercise={name};
+  liveReps=0;
+  liveTarget=rule.target;
+  livePhase="ready";
+
+  document.getElementById("liveTitle").textContent="▶ "+name;
+  document.getElementById("liveSubtitle").textContent="Live camera rep tracker";
+  document.getElementById("liveInstruction").textContent=rule.instruction;
+  document.getElementById("livePhase").textContent="READY";
+  document.getElementById("cameraStatus").textContent="Camera is off. Click Enable Camera.";
+  document.getElementById("cameraStartBtn").textContent="Enable Camera";
+  updateLiveUI();
+
+  /* Load the scrollable Spotify song selector for every exercise session. */
+  renderSpotifySongs();
+  openSpotifySong(spotifySongs[0].id);
+
+  document.getElementById("liveModal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function renderSpotifySongs(){
+  const picker=document.getElementById("spotifySongPicker");
+  if(!picker)return;
+  picker.innerHTML=spotifySongs.map(song=>`
+    <button class="spotify-song" id="spotify-song-${song.id}"
+      onclick="openSpotifySong('${song.id}')">
+      <div>
+        <strong>${escapeHTML(song.title)}</strong>
+        <span> • ${escapeHTML(song.artist)}</span>
+      </div>
+      <span class="play-label">▶ Play</span>
+    </button>
+  `).join("");
+}
+
+function openSpotifySong(songId){
+  const song=spotifySongs.find(x=>x.id===songId);
+  if(!song)return;
+  selectedSpotifySong=songId;
+  const frame=document.getElementById("spotifyPlayer");
+  if(frame){
+    frame.src=`https://open.spotify.com/embed/track/${song.id}?utm_source=generator&theme=0`;
+  }
+  const nowPlaying=document.getElementById("spotifyNowPlaying");
+  if(nowPlaying) nowPlaying.textContent=`Now selected: ${song.title} — ${song.artist}`;
+  document.querySelectorAll(".spotify-song").forEach(btn=>btn.classList.remove("active"));
+  const active=document.getElementById(`spotify-song-${song.id}`);
+  if(active)active.classList.add("active");
+}
+
+function stopExerciseTracker(){
+  cameraRunning=false;
+
+  if(cameraStream){
+    cameraStream.getTracks().forEach(track=>track.stop());
+    cameraStream=null;
+  }
+
+  const video=document.getElementById("cameraVideo");
+  video.pause();
+  video.srcObject=null;
+
+  document.getElementById("liveModal").classList.remove("open");
+  document.getElementById("spotifyPlayer").src="";
+  document.body.style.overflow="";
+}
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+function setTimer(seconds){
+  clearInterval(timerInterval);
+  timerDuration=seconds;
+  timerRemaining=seconds;
+  timerRunning=false;
+  updateTimerUI();
+}
+
+function setCustomTimer(){
+  const value=Number(document.getElementById("customSeconds").value);
+  if(!value || value<5 || value>3600){
+    toast("Enter a timer between 5 and 3600 seconds.");
+    return;
+  }
+  setTimer(value);
+}
+
+function toggleTimer(){
+  if(timerRunning){
+    clearInterval(timerInterval);
+    timerRunning=false;
+    document.getElementById("timerStatus").textContent="Paused";
+    document.getElementById("timerStartBtn").textContent="Resume";
+    return;
+  }
+
+  if(timerRemaining<=0) timerRemaining=timerDuration;
+
+  timerRunning=true;
+  document.getElementById("timerStatus").textContent="Running";
+  document.getElementById("timerStartBtn").textContent="Pause";
+
+  timerInterval=setInterval(()=>{
+    timerRemaining--;
+    updateTimerUI();
+
+    if(timerRemaining<=0){
+      clearInterval(timerInterval);
+      timerRunning=false;
+      timerRemaining=0;
+      updateTimerUI();
+      document.getElementById("timerStatus").textContent="Complete";
+      document.getElementById("timerStartBtn").textContent="Start";
+      beep();
+      toast("Rest complete! 🔥 Time for your next set.");
+    }
+  },1000);
+}
+
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerRunning=false;
+  timerRemaining=timerDuration;
+  document.getElementById("timerStatus").textContent="Ready";
+  document.getElementById("timerStartBtn").textContent="Start";
+  updateTimerUI();
+}
+
+function updateTimerUI(){
+  const min=Math.floor(timerRemaining/60);
+  const sec=timerRemaining%60;
+
+  document.getElementById("timerNumber").textContent=
+    `${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+
+  const progressRatio=timerDuration ? timerRemaining/timerDuration : 0;
+  document.getElementById("timerRing").style.background=
+    `conic-gradient(var(--accent) ${progressRatio*360}deg,#2a2a2a 0deg)`;
+}
+
+function beep(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.value=880;
+    gain.gain.value=.07;
+    osc.start();
+    osc.stop(ctx.currentTime+.22);
+  }catch(e){}
+}
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+function saveProgress(){
+  const weight=document.getElementById("progressWeight").value;
+  const chest=document.getElementById("chest").value;
+  const waist=document.getElementById("waist").value;
+  const arms=document.getElementById("arms").value;
+
+  if(!weight){
+    toast("Enter at least your current weight.");
+    return;
+  }
+
+  progress.push({
+    weight:Number(weight),
+    chest:chest?Number(chest):null,
+    waist:waist?Number(waist):null,
+    arms:arms?Number(arms):null,
+    date:new Date().toLocaleDateString()
+  });
+
+  localStorage.setItem("fitfuelProgress",JSON.stringify(progress));
+  showProgress();
+
+  document.getElementById("progressWeight").value="";
+  document.getElementById("chest").value="";
+  document.getElementById("waist").value="";
+  document.getElementById("arms").value="";
+
+  toast("Progress saved.");
+}
+
+function deleteProgress(index){
+  progress.splice(index,1);
+  localStorage.setItem("fitfuelProgress",JSON.stringify(progress));
+  showProgress();
+}
+
+function clearProgress(){
+  if(!progress.length){
+    toast("There is no progress history to clear.");
+    return;
+  }
+  if(!confirm("Clear all progress history?")) return;
+  progress=[];
+  localStorage.setItem("fitfuelProgress","[]");
+  showProgress();
+  toast("Progress history cleared.");
+}
+
+function showProgress(){
+  const history=document.getElementById("progressHistory");
+  document.getElementById("progressCount").textContent=
+    `${progress.length} ${progress.length===1?"entry":"entries"}`;
+
+  if(!progress.length){
+    history.innerHTML=`<div class="empty">No progress records yet.</div>`;
+    drawProgressChart();
+    return;
+  }
+
+  history.innerHTML=progress.slice().reverse().map((p,reverseIndex)=>{
+    const index=progress.length-1-reverseIndex;
+    return `
+      <div class="progress-row">
+        <span>${escapeHTML(p.date)}</span>
+        <span>${p.weight??"-"} kg</span>
+        <span>${p.chest??"-"} cm</span>
+        <span>${p.waist??"-"} cm</span>
+        <button class="btn small danger" onclick="deleteProgress(${index})">Delete</button>
+      </div>
+    `;
+  }).join("");
+
+  drawProgressChart();
+}
+
+/* =========================================================
+   ONE CANVAS ONLY
+   ========================================================= */
+function drawProgressChart(){
+  const canvas=document.getElementById("progressChart");
+  const ctx=canvas.getContext("2d");
+  const rect=canvas.getBoundingClientRect();
+  const dpr=window.devicePixelRatio||1;
+
+  canvas.width=Math.max(1,Math.floor(rect.width*dpr));
+  canvas.height=Math.max(1,Math.floor(rect.height*dpr));
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const width=rect.width;
+  const height=rect.height;
+
+  ctx.clearRect(0,0,width,height);
+
+  const left=48,right=20,top=22,bottom=40;
+  const chartW=Math.max(1,width-left-right);
+  const chartH=Math.max(1,height-top-bottom);
+
+  ctx.fillStyle="#777";
+  ctx.font="11px Arial";
+
+  if(!progress.length){
+    ctx.textAlign="center";
+    ctx.fillText("Save progress entries to see your weight trend.",width/2,height/2);
+    return;
+  }
+
+  const weights=progress.map(p=>Number(p.weight)).filter(Number.isFinite);
+  if(!weights.length){
+    ctx.textAlign="center";
+    ctx.fillText("Weight data is required for the chart.",width/2,height/2);
+    return;
+  }
+
+  let min=Math.min(...weights);
+  let max=Math.max(...weights);
+
+  if(min===max){min-=1;max+=1}
+  const padding=(max-min)*.12;
+  min-=padding;max+=padding;
+
+  /* grid */
+  ctx.strokeStyle="#242424";
+  ctx.lineWidth=1;
+
+  for(let i=0;i<=4;i++){
+    const y=top+(chartH/4)*i;
+    ctx.beginPath();
+    ctx.moveTo(left,y);
+    ctx.lineTo(left+chartW,y);
+    ctx.stroke();
+
+    const val=max-((max-min)/4)*i;
+    ctx.fillStyle="#777";
+    ctx.textAlign="right";
+    ctx.fillText(val.toFixed(1),left-8,y+4);
+  }
+
+  const points=progress.map((p,i)=>{
+    const x=progress.length===1
+      ? left+chartW/2
+      : left+(i/(progress.length-1))*chartW;
+    const y=top+((max-Number(p.weight))/(max-min))*chartH;
+    return {x,y};
+  });
+
+  /* line */
+  ctx.strokeStyle="#ff6b00";
+  ctx.lineWidth=3;
+  ctx.lineJoin="round";
+  ctx.lineCap="round";
+  ctx.beginPath();
+
+  points.forEach((p,i)=>{
+    if(i===0)ctx.moveTo(p.x,p.y);
+    else ctx.lineTo(p.x,p.y);
+  });
+  ctx.stroke();
+
+  /* points */
+  points.forEach((p,i)=>{
+    ctx.fillStyle="#ff6b00";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,4,0,Math.PI*2);
+    ctx.fill();
+
+    if(progress.length<=8){
+      ctx.fillStyle="#ddd";
+      ctx.textAlign="center";
+      ctx.font="10px Arial";
+      ctx.fillText(String(progress[i].weight),p.x,p.y-10);
+    }
+  });
+
+  /* x labels */
+  ctx.fillStyle="#777";
+  ctx.font="10px Arial";
+  ctx.textAlign="center";
+
+  const step=Math.max(1,Math.ceil(progress.length/6));
+  progress.forEach((p,i)=>{
+    if(i%step===0 || i===progress.length-1){
+      const x=points[i].x;
+      ctx.fillText(p.date,x,height-15);
+    }
+  });
+}
+
+window.addEventListener("resize",drawProgressChart);
+
+/* =========================================================
+   PERSONALIZED MUSCLEBLAZE STORE
+   ========================================================= */
+function renderStore(){
+  const grid=document.getElementById("productGrid");
+  const recommendation=document.getElementById("storeRecommendation");
+
+  const diet=userPlan.diet||"Non-Vegetarian";
+  const goal=userPlan.goal||"muscle";
+  const protein=storeProducts.protein[diet];
+
+  const goalText={
+    muscle:"muscle gain",
+    fatloss:"fat-loss support",
+    strength:"strength",
+    maintain:"maintenance"
+  }[goal]||"fitness";
+
+  recommendation.innerHTML=`
+    <strong>Recommended for ${escapeHTML(userPlan.name||"this member")}:</strong>
+    cycling/endurance hydration and energy products are included for every member.
+    The protein option below is matched to the selected <strong>${escapeHTML(diet)}</strong> diet
+    and your ${escapeHTML(goalText)} goal.
+    <p>Product prices and availability are shown on the official MuscleBlaze store.</p>
+  `;
+
+  const products=[
+    ...storeProducts.cycling,
+    protein
+  ];
+
+  grid.innerHTML=products.map((p,index)=>`
+    <div class="card product-card">
+      <div class="product-art">${p.icon}</div>
+      <h3>${escapeHTML(p.name)}</h3>
+      <div class="price">${escapeHTML(p.priceLabel)}</div>
+      <div class="tag">${escapeHTML(p.tag)}</div>
+      <p style="color:#aaa;font-size:12px;margin-top:8px">${escapeHTML(p.description)}</p>
+
+      <div class="product-actions">
+        <button class="btn small" onclick="addReferralToCart('${encodeURIComponent(p.id)}','${encodeURIComponent(p.name)}')">
+          Add
+        </button>
+        <a class="btn small external"
+           href="${p.url}"
+           target="_blank"
+           rel="noopener noreferrer">
+          MuscleBlaze ↗
+        </a>
+      </div>
+    </div>
+  `).join("");
+}
+
+function addReferralToCart(encodedId,encodedName){
+  const id=decodeURIComponent(encodedId);
+  const name=decodeURIComponent(encodedName);
+
+  /*
+    This is a FITFUEL shortlist/cart, not a fake MuscleBlaze checkout.
+    The actual purchase is completed on the official MuscleBlaze page.
+  */
+  const exists=cart.find(x=>x.id===id);
+  if(exists){
+    exists.qty=(exists.qty||1)+1;
+  }else{
+    cart.push({id,name,price:0,qty:1});
+  }
+
+  localStorage.setItem("fitfuelCart",JSON.stringify(cart));
+  updateCart();
+  toggleCart();
+  toast(`${name} added to your FITFUEL shortlist.`);
+}
+
+/* =========================================================
+   CART
+   ========================================================= */
+function removeCart(index){
+  cart.splice(index,1);
+  localStorage.setItem("fitfuelCart",JSON.stringify(cart));
+  updateCart();
+}
+
+function updateCart(){
+  const items=document.getElementById("cartItems");
+
+  if(!cart.length){
+    items.innerHTML=`<div class="empty">Your FITFUEL shortlist is empty.</div>`;
+  }else{
+    items.innerHTML=cart.map((item,index)=>`
+      <div class="cart-item">
+        <div>
+          <strong>${escapeHTML(item.name)}</strong>
+          <br>
+          <small>${item.qty||1} selected • Official MuscleBlaze purchase link</small>
+        </div>
+        <button class="btn small danger" onclick="removeCart(${index})">×</button>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("cartTotal").textContent="External";
+  document.getElementById("cartCount").textContent=
+    cart.reduce((sum,item)=>sum+(item.qty||1),0);
+}
+
+function toggleCart(){
+  document.getElementById("cart").classList.toggle("open");
+}
+
+function checkout(){
+  if(!cart.length){
+    toast("Your shortlist is empty.");
+    return;
+  }
+
+  /*
+    Open the official MuscleBlaze store rather than pretending FITFUEL
+    processes MuscleBlaze payments.
+  */
+  window.open(mbLinks.brand,"_blank","noopener,noreferrer");
+}
+
+/* =========================================================
+   PROFILE / RESET
+   ========================================================= */
+function clearProfile(){
+  localStorage.removeItem("fitfuelUser");
+  userPlan={};
+
+  ["name","age","height","weight","progressWeight","chest","waist","arms"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value="";
+  });
+
+  document.getElementById("gender").value="male";
+  document.getElementById("goal").value="muscle";
+  document.getElementById("days").value="5";
+  document.getElementById("dietType").value="Non-Vegetarian";
+
+  document.getElementById("planResult").style.display="none";
+  document.getElementById("workoutPlan").innerHTML=
+    `<div class="empty">Your personalized workout will appear here.</div>`;
+  document.getElementById("dietPlan").innerHTML=
+    `<div class="empty">Generate your profile above to create the nutrition plan.</div>`;
+
+  document.getElementById("workoutSubtitle").textContent=
+    "Generate your profile above to create the schedule.";
+
+  renderStore();
+  toast("Profile reset.");
+}
+
+function loadUser(){
+  const saved=JSON.parse(localStorage.getItem("fitfuelUser")||"null");
+  if(!saved) return;
+
+  userPlan=saved;
+
+  document.getElementById("name").value=saved.name||"";
+  document.getElementById("age").value=saved.age||"";
+  document.getElementById("gender").value=saved.gender||"male";
+  document.getElementById("height").value=saved.height||"";
+  document.getElementById("weight").value=saved.weight||"";
+  document.getElementById("goal").value=saved.goal||"muscle";
+  document.getElementById("days").value=saved.days||5;
+  document.getElementById("dietType").value=saved.diet||"Non-Vegetarian";
+
+  generatePlan();
+}
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+renderExerciseLibrary();
+renderStore();
+updateCart();
+showProgress();
+
+if(userPlan && userPlan.name){
+  loadUser();
+}else{
+  setTimer(60);
+}
+</script>
+
+</body>
+</html>
