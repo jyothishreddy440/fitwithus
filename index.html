@@ -305,6 +305,49 @@ input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(25
 .total{display:flex;justify-content:space-between;font-size:20px;font-weight:950}
 .empty{text-align:center;color:#777;padding:28px 8px}
 
+
+/* ABOUT / PRIVACY / TERMS */
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.info-card{
+  background:linear-gradient(180deg,#171717,#101010);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:24px;
+}
+.info-card h3{font-size:19px;margin-bottom:9px}
+.info-card p,.info-card li{color:#aaa;font-size:13px;line-height:1.7}
+.info-card ul{padding-left:19px;margin-top:10px}
+.info-card a{color:var(--accent);font-weight:800}
+.legal-box{
+  background:linear-gradient(180deg,#171717,#101010);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:26px;
+  max-width:980px;
+  margin:auto;
+}
+.legal-box h3{margin:22px 0 7px;font-size:17px;color:#fff}
+.legal-box h3:first-child{margin-top:0}
+.legal-box p,.legal-box li{color:#aaa;font-size:13px;line-height:1.75}
+.legal-box ul{padding-left:20px;margin:8px 0}
+.contact-email{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  padding:10px 13px;
+  border:1px solid #3a3a3a;
+  border-radius:10px;
+  background:#0d0d0d;
+}
+@media(max-width:800px){
+  .info-grid{grid-template-columns:1fr}
+}
+
 /* TOAST / FOOTER */
 .toast{
   position:fixed;right:20px;bottom:20px;z-index:5000;background:#181818;
@@ -462,6 +505,9 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
       <a href="#exerciseLibrary">Guides</a>
       <a href="#progress">Progress</a>
       <a href="#store">Store</a>
+      <a href="#about">About</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
     </div>
 
     <div class="nav-actions">
@@ -743,6 +789,174 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   </div>
 </section>
 
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="title">
+      <h2>About FITFUEL</h2>
+      <p>Built to make training, nutrition and progress easier to manage.</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>About Us</h3>
+        <p>
+          FITFUEL is a personal fitness and cycling fuel dashboard built by
+          <strong style="color:#fff">Varun &amp; Jyothish</strong>.
+          It brings workout planning, diet targets, exercise guides, progress tracking,
+          a workout timer and training-fuel recommendations together in one place.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h3>Contact Us</h3>
+        <p>If you have questions, suggestions, feedback or website-related concerns, contact us by email.</p>
+        <a class="contact-email" href="mailto:fitwithme413@gmail.com">
+          ✉️ fitwithme413@gmail.com
+        </a>
+      </div>
+
+      <div class="info-card">
+        <h3>Important Note</h3>
+        <p>
+          FITFUEL provides general fitness and nutrition information for educational
+          purposes. It is not a substitute for advice from a qualified doctor,
+          dietitian, physiotherapist or other healthcare professional.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY POLICY -->
+<section id="privacy">
+  <div class="container">
+    <div class="title">
+      <h2>Privacy Policy</h2>
+      <p>How FITFUEL handles information used by the website.</p>
+    </div>
+
+    <div class="legal-box">
+      <h3>1. Information We Collect</h3>
+      <p>
+        FITFUEL may use information that you enter into the fitness planner, such as
+        your name, age, gender, height, weight, fitness goal, workout days and diet
+        preference. Progress entries may also include weight and body measurements.
+      </p>
+
+      <h3>2. Local Storage</h3>
+      <p>
+        The current FITFUEL version stores plan information, selected meals, completed
+        exercises, progress history and the product shortlist in your browser using
+        local storage. This means the information is primarily stored on the device
+        and browser where you use FITFUEL.
+      </p>
+
+      <h3>3. Third-Party Services</h3>
+      <p>
+        FITFUEL may load content or services from third parties, including YouTube,
+        Spotify, jsDelivr and MuscleBlaze. Those services may process information
+        according to their own privacy policies and terms.
+      </p>
+
+      <h3>4. Camera Feature</h3>
+      <p>
+        The optional exercise-repetition tracker requests camera permission only when
+        you choose to enable it. Camera access can be denied through your browser.
+        Do not use the feature if you are uncomfortable granting camera access.
+      </p>
+
+      <h3>5. Email Contact</h3>
+      <p>
+        If you contact us at
+        <a href="mailto:fitwithme413@gmail.com">fitwithme413@gmail.com</a>,
+        we may receive the information you include in your message so that we can
+        respond to your request.
+      </p>
+
+      <h3>6. Data Deletion</h3>
+      <p>
+        You can clear information stored locally by using the reset and clear-history
+        controls provided by FITFUEL or by clearing the site's data in your browser.
+      </p>
+
+      <h3>7. Policy Updates</h3>
+      <p>
+        This Privacy Policy may be updated as FITFUEL adds or changes features.
+        Updated versions will be published on this website.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section id="terms">
+  <div class="container">
+    <div class="title">
+      <h2>Terms &amp; Conditions</h2>
+      <p>Please read these terms before using FITFUEL.</p>
+    </div>
+
+    <div class="legal-box">
+      <h3>1. Use of FITFUEL</h3>
+      <p>
+        FITFUEL is provided as a fitness planning and educational tool. You agree to
+        use the website responsibly and only for lawful purposes.
+      </p>
+
+      <h3>2. Fitness &amp; Nutrition Disclaimer</h3>
+      <p>
+        Workout plans, nutrition targets, exercise instructions and recommendations
+        are general informational guidance. FITFUEL does not provide medical diagnosis
+        or individualized medical treatment. Consult a qualified professional before
+        starting a new exercise or nutrition program, particularly if you have any
+        medical concerns or limitations.
+      </p>
+
+      <h3>3. Accuracy</h3>
+      <p>
+        We aim to keep FITFUEL useful and accurate, but we do not guarantee that every
+        calculation, recommendation, exercise description, product listing or external
+        link will always be complete, current or error-free.
+      </p>
+
+      <h3>4. Third-Party Links</h3>
+      <p>
+        FITFUEL may link to external websites and services. We do not control those
+        third-party websites and are not responsible for their content, availability,
+        privacy practices or transactions.
+      </p>
+
+      <h3>5. Store Recommendations</h3>
+      <p>
+        Product links in the FITFUEL store section direct users to external
+        MuscleBlaze pages. FITFUEL does not process or represent itself as processing
+        those third-party purchases or payments.
+      </p>
+
+      <h3>6. User Responsibility</h3>
+      <p>
+        You are responsible for the information you enter and for deciding whether a
+        workout, diet target or recommendation is appropriate for you.
+      </p>
+
+      <h3>7. Changes to These Terms</h3>
+      <p>
+        We may update these Terms &amp; Conditions when the website or its services
+        change. Continued use of FITFUEL after an update means you accept the revised
+        terms.
+      </p>
+
+      <h3>8. Contact</h3>
+      <p>
+        For questions about these terms, contact
+        <a href="mailto:fitwithme413@gmail.com">fitwithme413@gmail.com</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -750,6 +964,17 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
     <div>
       <div class="footer-logo">FITFUEL</div>
       <p>Train. Eat. Ride. Recover. Repeat.</p>
+      <p style="margin-top:8px">
+        <a href="#about" style="color:#aaa">About</a> ·
+        <a href="#privacy" style="color:#aaa">Privacy Policy</a> ·
+        <a href="#terms" style="color:#aaa">Terms &amp; Conditions</a>
+      </p>
+      <p style="margin-top:8px">
+        Contact:
+        <a href="mailto:fitwithme413@gmail.com" style="color:var(--accent)">
+          fitwithme413@gmail.com
+        </a>
+      </p>
     </div>
     <p>© 2026 FITFUEL. All rights reserved.</p>
   </div>
