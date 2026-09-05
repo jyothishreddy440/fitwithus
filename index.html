@@ -682,7 +682,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
     <div class="formbox">
       <div class="formgrid">
         <div class="formgroup"><label>Name</label><input id="name" placeholder="Your name"></div>
-        <div class="formgroup"><label>Age (18+)</label><input id="age" type="number" min="18" max="100" placeholder="21"></div>
+        <div class="formgroup"><label>Age</label><input id="age" type="number" placeholder="21"></div>
 
         <div class="formgroup">
           <label>Gender</label>
@@ -1533,19 +1533,14 @@ function toast(message){
    ========================================================= */
 function generatePlan(){
   const name=(document.getElementById("name").value||"Athlete").trim();
-  const age=Number(document.getElementById("age").value);
+  const age=Number(document.getElementById("age").value)||21;
   const gender=document.getElementById("gender").value;
-  const height=Number(document.getElementById("height").value);
-  const weight=Number(document.getElementById("weight").value);
+  const height=Number(document.getElementById("height").value)||170;
+  const weight=Number(document.getElementById("weight").value)||60;
   const goal=document.getElementById("goal").value;
   const days=Number(document.getElementById("days").value);
   const diet=document.getElementById("dietType").value;
   const activity=Number(document.getElementById("activityLevel").value);
-
-  if(!Number.isFinite(age)||!Number.isFinite(height)||!Number.isFinite(weight)||age<18||age>100||height<120||height>230||weight<30||weight>300){
-    toast("Enter a valid adult age (18+), height and weight to calculate an estimate.");
-    return;
-  }
 
   let bmr=gender==="male"
     ? (10*weight)+(6.25*height)-(5*age)+5
@@ -1599,7 +1594,8 @@ function generatePlan(){
       BMR uses Mifflin–St Jeor and your selected activity level. Reassess using your
       weight trend, appetite and training performance after 2–4 weeks. Pregnancy,
       breastfeeding, diabetes, kidney disease, eating-disorder history or other medical
-      conditions need individual guidance from a registered dietitian or clinician.<br><br>
+      conditions need individual guidance from a registered dietitian or clinician. Growing
+      teens may have different energy needs, so involve a qualified professional when possible.<br><br>
       <strong style="color:#ddd">Store personalization:</strong>
       cycling/endurance hydration and energy products are shown for every member.
       The protein recommendation is changed to match the selected diet.
@@ -1710,11 +1706,6 @@ function toggleExercise(encodedKey){
    DIET
    ========================================================= */
 function generateDiet(plan){
-  if(!Number.isFinite(Number(plan?.calories)) || Number(plan.calories)<=0){
-    document.getElementById("dietPlan").innerHTML=
-      `<div class="empty">Enter valid adult profile details and generate your plan to see portion sizes.</div>`;
-    return;
-  }
   /* Values are approximate per 100 g (or 100 ml for milk), before added sauces.
      Rice, dal, beans, chicken and vegetables below are COOKED edible weights. */
   const food=(name,amount,unit,kcalPer100,proteinPer100)=>({name,amount,unit,kcalPer100,proteinPer100});
@@ -1754,10 +1745,55 @@ function generateDiet(plan){
     ];
   }
 
+  const targetCalories=Math.round(Number(plan.calories)||0);
+  const targetProtein=Math.round(Number(plan.protein)||0);
   const baseCalories=foods.flatMap(f=>f[1]).reduce((sum,item)=>sum+(item.amount*item.kcalPer100/100),0);
-  // Scale all displayed portions to the goal; guard against impractically small/large plates.
-  const scale=Math.max(.70,Math.min(1.40,plan.calories/baseCalories));
+  const baseProtein=foods.flatMap(f=>f[1]).reduce((sum,item)=>sum+(item.amount*item.proteinPer100/100),0);
+  // Begin below both targets, then add measured rice, protein and oil portions so
+  // the displayed meal total tracks the calculated calorie and protein targets.
+  const scale=Math.max(.15,Math.min(.50,(targetCalories/baseCalories)*.82,(targetProtein/baseProtein)*.72));
   foods=foods.map(([meal,items])=>[meal,items.map(item=>({...item,amount:Math.max(5,Math.round(item.amount*scale/5)*5)}))]);
+
+  const tuningFood=plan.diet==="Vegetarian"
+    ? food("extra paneer",0,"g",265,18.3)
+    : plan.diet==="Vegan"
+      ? food("extra firm tofu",0,"g",144,15.7)
+      : plan.diet==="Eggitarian"
+        ? food("extra eggs",0,"g",143,12.6)
+        : food("extra skinless chicken breast, cooked",0,"g",165,31);
+  const currentCalories=foods.flatMap(f=>f[1]).reduce((sum,item)=>sum+(item.amount*item.kcalPer100/100),0);
+  const currentProtein=foods.flatMap(f=>f[1]).reduce((sum,item)=>sum+(item.amount*item.proteinPer100/100),0);
+  const calorieNeed=targetCalories-currentCalories;
+  const proteinNeed=targetProtein-currentProtein;
+  const riceKcal=1.30, riceProtein=.024, oilKcal=8.84;
+  let bestAdjustment=null;
+
+  // Find practical whole-gram additions that solve both targets. Oil has no protein,
+  // so it lets calories be matched without inflating the protein total.
+  for(let oil=0;oil<=80;oil++){
+    const energyAfterOil=calorieNeed-(oil*oilKcal);
+    const denominator=(tuningFood.proteinPer100/100)*riceKcal-(tuningFood.kcalPer100/100)*riceProtein;
+    const proteinGrams=(proteinNeed*riceKcal-energyAfterOil*riceProtein)/denominator;
+    const riceGrams=(proteinNeed-(tuningFood.proteinPer100/100)*proteinGrams)/riceProtein;
+    if(riceGrams>=0&&proteinGrams>=0&&energyAfterOil>=0){
+      const score=(riceGrams*.012)+(proteinGrams*.02)+(Math.abs(oil-25)*.12);
+      if(!bestAdjustment||score<bestAdjustment.score) bestAdjustment={riceGrams,proteinGrams,oil,score};
+    }
+  }
+  if(bestAdjustment){
+    const additions=[
+      food("extra white rice, cooked",Math.round(bestAdjustment.riceGrams),"g",130,2.4),
+      {...tuningFood,amount:Math.round(bestAdjustment.proteinGrams)},
+      food("extra cooking oil",bestAdjustment.oil,"g",884,0)
+    ].filter(item=>item.amount>0);
+    // Split the calculated additions between lunch and dinner rather than hiding them in one meal.
+    additions.forEach(item=>{
+      const lunchAmount=Math.floor(item.amount/2);
+      const dinnerAmount=item.amount-lunchAmount;
+      if(lunchAmount) foods[2][1].push({...item,amount:lunchAmount});
+      if(dinnerAmount) foods[4][1].push({...item,amount:dinnerAmount});
+    });
+  }
   const mealTotals=foods.map(([meal,items])=>({
     meal,items,
     calories:items.reduce((sum,item)=>sum+(item.amount*item.kcalPer100/100),0),
@@ -1765,8 +1801,6 @@ function generateDiet(plan){
   }));
   const totalCalories=mealTotals.reduce((sum,meal)=>sum+meal.calories,0);
   const totalProtein=mealTotals.reduce((sum,meal)=>sum+meal.protein,0);
-  const targetCalories=Math.round(Number(plan.calories)||0);
-  const targetProtein=Math.round(Number(plan.protein)||0);
   const targetCarbs=Math.round(Number(plan.carbs)||0);
   const targetFats=Math.round(Number(plan.fats)||0);
   const listedCalories=Math.round(totalCalories);
@@ -1797,7 +1831,7 @@ function generateDiet(plan){
           <div class="food ${done?"done":""}" onclick="toggleMeal('${encodeURIComponent(key)}')">
             <div class="food-name">
               <strong>${meal.meal}</strong>
-              <span>${meal.items.map(item=>`${item.amount}${item.unit} ${item.name}: ${Math.round(item.amount*item.kcalPer100/100)} kcal • ${(item.amount*item.proteinPer100/100).toFixed(1)}g protein`).join(" | ")}</span>
+              <span>${meal.items.map(item=>`${item.amount}${item.unit} ${item.name}: ${Math.round(item.amount*item.kcalPer100/100)} kcal • ${Math.round(item.amount*item.proteinPer100/100)}g protein`).join(" | ")}</span>
             </div>
             <div class="food-right">
               ${Math.round(meal.calories)} kcal<br><span>${Math.round(meal.protein)}g protein</span>
