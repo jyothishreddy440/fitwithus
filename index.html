@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080808">
-<title>FITFUEL — Built by Varun & Jyothish</title>
+<title>FITWITHME — Built by Varun & Jyothish</title>
 
 <style>
 :root{
@@ -20,6 +20,7 @@
   --green:#38d996;
   --red:#ff5757;
   --shadow:0 24px 70px rgba(0,0,0,.42);
+  --brand-font:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -31,6 +32,7 @@ body{
     var(--bg);
   color:var(--text);
   line-height:1.5;
+  overflow-x:hidden;
 }
 button,input,select{font:inherit}
 button{cursor:pointer}
@@ -48,7 +50,12 @@ a{text-decoration:none;color:inherit}
 .nav-inner{
   min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px
 }
-.logo{font-size:25px;font-weight:950;letter-spacing:-1px;color:var(--accent)}
+.logo,.footer-logo,.opening-kicker{
+  font-family:var(--brand-font);font-weight:400;letter-spacing:1.8px;color:var(--accent);
+  text-transform:uppercase;text-shadow:0 0 22px rgba(255,107,0,.24)
+}
+.logo{font-size:28px;line-height:1;position:relative}
+.logo span,.footer-logo span{color:#fff;font-style:italic}
 .navlinks{display:flex;gap:22px}
 .navlinks a{font-size:13px;font-weight:800;color:#d6d6d6;transition:.2s}
 .navlinks a:hover{color:var(--accent)}
@@ -63,33 +70,46 @@ a{text-decoration:none;color:inherit}
 /* HERO */
 .hero{
   min-height:660px;
-  display:flex;align-items:center;
+  display:flex;align-items:center;position:relative;isolation:isolate;overflow:hidden;
   background:
     linear-gradient(90deg,#050505 18%,rgba(5,5,5,.82) 48%,rgba(5,5,5,.35)),
     url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1900&q=85")
     center/cover;
 }
-.hero-content{max-width:740px;padding:82px 0}
+.hero:before{
+  content:"";position:absolute;z-index:-1;width:62vw;height:62vw;right:-23vw;top:-31vw;
+  border:1px solid rgba(255,141,61,.28);border-radius:50%;
+  box-shadow:0 0 0 48px rgba(255,107,0,.035),0 0 0 96px rgba(255,107,0,.025),0 0 90px rgba(255,107,0,.18);
+  animation:orbitGlow 13s linear infinite;
+}
+.hero:after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.08) 47%,transparent 61%);
+  transform:translateX(-115%);animation:heroSweep 8s ease-in-out infinite;
+}
+.hero-content{max-width:740px;padding:82px 0;animation:riseIn .8s .15s both}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   border:1px solid #393939;background:rgba(17,17,17,.75);
   border-radius:999px;padding:7px 11px;margin-bottom:18px;
   color:#ddd;text-transform:uppercase;letter-spacing:1px;font-size:10px;font-weight:950
 }
-.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(255,107,0,.72);animation:pulse 2s infinite}
 .hero h1{
   font-size:clamp(44px,7vw,78px);
   line-height:.95;letter-spacing:-3px;margin-bottom:22px
 }
-.hero h1 span{color:var(--accent)}
+.hero h1 span{color:var(--accent);text-shadow:0 0 28px rgba(255,107,0,.35)}
 .hero p{font-size:19px;color:#c8c8c8;max-width:660px;margin-bottom:28px}
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   border:1px solid var(--accent);background:var(--accent);color:#fff;
-  padding:12px 18px;border-radius:10px;font-weight:900;transition:.2s
+  padding:12px 18px;border-radius:10px;font-weight:900;transition:.2s;position:relative;overflow:hidden
 }
 .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 22%,rgba(255,255,255,.3) 48%,transparent 72%);transform:translateX(-125%);transition:transform .55s ease}
+.btn:hover:before{transform:translateX(125%)}
 .btn.secondary{background:transparent;border-color:#555}
 .btn.ghost{background:#191919;border-color:#363636}
 .btn.small{padding:8px 11px;font-size:12px}
@@ -115,11 +135,13 @@ section{padding:82px 0;scroll-margin-top:78px}
   min-height:245px;text-align:left;border:1px solid var(--border);
   color:var(--text);position:relative;overflow:hidden;transition:.25s
 }
-.feature-card:hover{transform:translateY(-5px);border-color:#4d4d4d}
+.feature-card:hover{transform:translateY(-8px) scale(1.012);border-color:rgba(255,141,61,.72);box-shadow:0 20px 42px rgba(0,0,0,.36),0 0 0 1px rgba(255,107,0,.12)}
 .feature-card:after{
   content:"";position:absolute;width:130px;height:130px;right:-50px;bottom:-60px;
   border-radius:50%;background:rgba(255,107,0,.08)
 }
+.feature-card:before{content:"";position:absolute;inset:-70% -30%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.1) 50%,transparent 58%);transform:translateX(-35%) rotate(10deg);transition:transform .7s ease;pointer-events:none}
+.feature-card:hover:before{transform:translateX(55%) rotate(10deg)}
 .feature-icon{font-size:37px;margin-bottom:20px}
 .feature-card h3{font-size:19px;margin-bottom:8px}
 .feature-card p{font-size:13px;color:#999}
@@ -145,6 +167,10 @@ input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(25
   padding:15px;text-align:center;color:#aaa;font-size:11px;font-weight:800
 }
 .stat strong{display:block;color:var(--accent);font-size:23px;line-height:1.1;margin-bottom:4px}
+.result .stat{animation:statPop .45s both}.result .stat:nth-child(2){animation-delay:.06s}.result .stat:nth-child(3){animation-delay:.12s}.result .stat:nth-child(4){animation-delay:.18s}.result .stat:nth-child(5){animation-delay:.24s}
+.diet-summary{grid-template-columns:repeat(5,minmax(105px,1fr));gap:9px}
+.diet-summary .stat{padding:10px 8px;font-size:10px}
+.diet-summary .stat strong{font-size:19px;white-space:nowrap}
 .profile-note{
   margin-top:15px;padding:12px;border:1px solid #2e2e2e;border-radius:10px;
   color:#888;font-size:12px
@@ -357,7 +383,21 @@ input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(25
 .toast.show{opacity:1;transform:translateY(0)}
 footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.footer-logo{color:var(--accent);font-weight:950;font-size:21px}
+.footer-logo{font-size:24px}
+
+/* Progressive reveal: activated only when JavaScript is available. */
+.reveal-ready .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal-ready .reveal.is-visible{opacity:1;transform:none}
+
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,0,.66)}55%{box-shadow:0 0 0 9px rgba(255,107,0,0)}}
+@keyframes orbitGlow{to{transform:rotate(360deg)}}
+@keyframes heroSweep{0%,58%{transform:translateX(-115%)}78%,100%{transform:translateX(115%)}}
+@keyframes statPop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
 
 @media(max-width:1050px){
   .grid,.exercise-grid{grid-template-columns:repeat(2,1fr)}
@@ -370,6 +410,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   .hero{min-height:590px}.hero h1{letter-spacing:-2px}
   .grid,.exercise-grid,.formgrid{grid-template-columns:1fr}
   .statgrid{grid-template-columns:repeat(2,1fr)}
+  .diet-summary{grid-template-columns:repeat(2,1fr)}
   .exercise{flex-direction:column;align-items:flex-start}
   .exercise-actions{justify-content:flex-start}
   .guide-grid{grid-template-columns:1fr}
@@ -423,18 +464,19 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   animation:creditIn .75s ease both;
 }
 .opening-mark{
-  width:82px;
-  height:82px;
-  margin:0 auto 22px;
+  width:64px;
+  height:64px;
+  margin:0 auto 16px;
   display:grid;
   place-items:center;
   border-radius:24px;
   background:linear-gradient(135deg,#ff6b00,#ff9b52);
   color:#fff;
-  font-size:24px;
+  font-size:19px;
   font-weight:950;
   letter-spacing:-1px;
   box-shadow:0 20px 70px rgba(255,107,0,.28);
+  animation:markPop .55s .12s both;
 }
 .opening-kicker{
   color:#aaa;
@@ -446,7 +488,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
 .opening-credit h1{
   margin:0;
   color:#fff;
-  font-size:clamp(32px,6vw,64px);
+  font-size:clamp(25px,4.4vw,46px);
   line-height:1;
   letter-spacing:-2.5px;
   font-weight:950;
@@ -471,6 +513,11 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
 @keyframes creditIn{
   from{opacity:0;transform:translateY(18px) scale(.98)}
   to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes markPop{
+  0%{opacity:0;transform:scale(.55) rotate(-12deg)}
+  70%{transform:scale(1.08) rotate(2deg)}
+  100%{opacity:1;transform:none}
 }
 
 
@@ -515,7 +562,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
 <div id="openingCredit" class="opening-credit">
   <div class="opening-credit-inner">
     <div class="opening-mark">FF</div>
-    <div class="opening-kicker">FITFUEL</div>
+    <div class="opening-kicker">FITWITHME</div>
     <h1>BUILT BY <span>VARUN</span> &amp; <span>JYOTHISH</span></h1>
     <p>Personal Fitness &amp; Cycling Fuel Dashboard</p>
     <div class="opening-line"></div>
@@ -526,7 +573,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
 
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="#home" class="logo">FITFUEL</a>
+    <a href="#home" class="logo" aria-label="FITWITHME home">FIT<span>WITH</span>ME</a>
 
     <div class="navlinks">
       <a href="#home">Home</a>
@@ -587,7 +634,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
       <button class="card feature-card" onclick="scrollToId('exerciseLibrary')">
         <div class="feature-icon">🎬</div>
         <h3>Exercise Guide</h3>
-        <p>Open a YouTube exercise tutorial inside FITFUEL without navigating away.</p>
+        <p>Open a YouTube exercise tutorial inside FITWITHME without navigating away.</p>
         <div class="feature-link">Open guides →</div>
       </button>
 
@@ -635,7 +682,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
     <div class="formbox">
       <div class="formgrid">
         <div class="formgroup"><label>Name</label><input id="name" placeholder="Your name"></div>
-        <div class="formgroup"><label>Age</label><input id="age" type="number" min="13" max="100" placeholder="21"></div>
+        <div class="formgroup"><label>Age (18+)</label><input id="age" type="number" min="18" max="100" placeholder="21"></div>
 
         <div class="formgroup">
           <label>Gender</label>
@@ -665,6 +712,16 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
             <option value="4">4 Days</option>
             <option value="5" selected>5 Days</option>
             <option value="6">6 Days</option>
+          </select>
+        </div>
+
+        <div class="formgroup">
+          <label>Daily activity outside workouts</label>
+          <select id="activityLevel">
+            <option value="1.35">Mostly sitting / little walking</option>
+            <option value="1.50" selected>Lightly active (regular walking)</option>
+            <option value="1.65">Active job or frequent walking</option>
+            <option value="1.80">Very active physical work</option>
           </select>
         </div>
 
@@ -707,7 +764,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   <div class="container">
     <div class="title">
       <h2>Personalized Diet</h2>
-      <p>Meal choices change according to the member's selected diet.</p>
+      <p>Portions are shown as cooked/edible weights, with calories and protein for each ingredient.</p>
     </div>
 
     <div id="dietPlan" class="formbox">
@@ -737,7 +794,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   <div class="container">
     <div class="title">
       <h2>Exercise Video Guides</h2>
-      <p>Videos open in a FITFUEL popup — the main page stays open.</p>
+      <p>Videos open in a FITWITHME popup — the main page stays open.</p>
     </div>
 
     <div class="toolbar">
@@ -763,7 +820,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   <div class="container">
     <div class="title">
       <h2>Workout Timer</h2>
-      <p>Use it between sets without leaving FITFUEL.</p>
+      <p>Use it between sets without leaving FITWITHME.</p>
     </div>
 
     <div class="formbox timer-box">
@@ -873,7 +930,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
 <section id="about">
   <div class="container">
     <div class="title">
-      <h2>About FITFUEL</h2>
+      <h2>About FITWITHME</h2>
       <p>Built to make training, nutrition and progress easier to manage.</p>
     </div>
 
@@ -881,7 +938,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
       <div class="info-card">
         <h3>About Us</h3>
         <p>
-          FITFUEL is a personal fitness and cycling fuel dashboard built by
+          FITWITHME is a personal fitness and cycling fuel dashboard built by
           <strong style="color:#fff">Varun &amp; Jyothish</strong>.
           It brings workout planning, diet targets, exercise guides, progress tracking,
           a workout timer and training-fuel recommendations together in one place.
@@ -899,7 +956,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
       <div class="info-card">
         <h3>Important Note</h3>
         <p>
-          FITFUEL provides general fitness and nutrition information for educational
+          FITWITHME provides general fitness and nutrition information for educational
           purposes. It is not a substitute for advice from a qualified doctor,
           dietitian, physiotherapist or other healthcare professional.
         </p>
@@ -913,28 +970,28 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   <div class="container">
     <div class="title">
       <h2>Privacy Policy</h2>
-      <p>How FITFUEL handles information used by the website.</p>
+      <p>How FITWITHME handles information used by the website.</p>
     </div>
 
     <div class="legal-box">
       <h3>1. Information We Collect</h3>
       <p>
-        FITFUEL may use information that you enter into the fitness planner, such as
+        FITWITHME may use information that you enter into the fitness planner, such as
         your name, age, gender, height, weight, fitness goal, workout days and diet
         preference. Progress entries may also include weight and body measurements.
       </p>
 
       <h3>2. Local Storage</h3>
       <p>
-        The current FITFUEL version stores plan information, selected meals, completed
+        The current FITWITHME version stores plan information, selected meals, completed
         exercises, progress history and the product shortlist in your browser using
         local storage. This means the information is primarily stored on the device
-        and browser where you use FITFUEL.
+        and browser where you use FITWITHME.
       </p>
 
       <h3>3. Third-Party Services</h3>
       <p>
-        FITFUEL may load content or services from third parties, including YouTube,
+        FITWITHME may load content or services from third parties, including YouTube,
         Spotify, jsDelivr and MuscleBlaze. Those services may process information
         according to their own privacy policies and terms.
       </p>
@@ -957,12 +1014,12 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
       <h3>6. Data Deletion</h3>
       <p>
         You can clear information stored locally by using the reset and clear-history
-        controls provided by FITFUEL or by clearing the site's data in your browser.
+        controls provided by FITWITHME or by clearing the site's data in your browser.
       </p>
 
       <h3>7. Policy Updates</h3>
       <p>
-        This Privacy Policy may be updated as FITFUEL adds or changes features.
+        This Privacy Policy may be updated as FITWITHME adds or changes features.
         Updated versions will be published on this website.
       </p>
     </div>
@@ -974,20 +1031,20 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
   <div class="container">
     <div class="title">
       <h2>Terms &amp; Conditions</h2>
-      <p>Please read these terms before using FITFUEL.</p>
+      <p>Please read these terms before using FITWITHME.</p>
     </div>
 
     <div class="legal-box">
-      <h3>1. Use of FITFUEL</h3>
+      <h3>1. Use of FITWITHME</h3>
       <p>
-        FITFUEL is provided as a fitness planning and educational tool. You agree to
+        FITWITHME is provided as a fitness planning and educational tool. You agree to
         use the website responsibly and only for lawful purposes.
       </p>
 
       <h3>2. Fitness &amp; Nutrition Disclaimer</h3>
       <p>
         Workout plans, nutrition targets, exercise instructions and recommendations
-        are general informational guidance. FITFUEL does not provide medical diagnosis
+        are general informational guidance. FITWITHME does not provide medical diagnosis
         or individualized medical treatment. Consult a qualified professional before
         starting a new exercise or nutrition program, particularly if you have any
         medical concerns or limitations.
@@ -995,22 +1052,22 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
 
       <h3>3. Accuracy</h3>
       <p>
-        We aim to keep FITFUEL useful and accurate, but we do not guarantee that every
+        We aim to keep FITWITHME useful and accurate, but we do not guarantee that every
         calculation, recommendation, exercise description, product listing or external
         link will always be complete, current or error-free.
       </p>
 
       <h3>4. Third-Party Links</h3>
       <p>
-        FITFUEL may link to external websites and services. We do not control those
+        FITWITHME may link to external websites and services. We do not control those
         third-party websites and are not responsible for their content, availability,
         privacy practices or transactions.
       </p>
 
       <h3>5. Store Recommendations</h3>
       <p>
-        Product links in the FITFUEL store section direct users to external
-        MuscleBlaze pages. FITFUEL does not process or represent itself as processing
+        Product links in the FITWITHME store section direct users to external
+        MuscleBlaze pages. FITWITHME does not process or represent itself as processing
         those third-party purchases or payments.
       </p>
 
@@ -1023,7 +1080,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
       <h3>7. Changes to These Terms</h3>
       <p>
         We may update these Terms &amp; Conditions when the website or its services
-        change. Continued use of FITFUEL after an update means you accept the revised
+        change. Continued use of FITWITHME after an update means you accept the revised
         terms.
       </p>
 
@@ -1041,7 +1098,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
 <footer>
   <div class="container footer-inner">
     <div>
-      <div class="footer-logo">FITFUEL</div>
+      <div class="footer-logo">FIT<span>WITH</span>ME</div>
       <p>Train. Eat. Ride. Recover. Repeat.</p>
       <p style="margin-top:8px">
         <a href="#about" style="color:#aaa">About</a> ·
@@ -1055,7 +1112,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
         </a>
       </p>
     </div>
-    <p>© 2026 FITFUEL. All rights reserved.</p>
+    <p>© 2026 FITWITHME. All rights reserved.</p>
   </div>
 </footer>
 
@@ -1073,7 +1130,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
     <div class="video-wrap">
       <iframe
         id="videoFrame"
-        title="FITFUEL Exercise Guide"
+        title="FITWITHME Exercise Guide"
         referrerpolicy="strict-origin-when-cross-origin"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
@@ -1084,7 +1141,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
           <strong>Embedded video could not be loaded.</strong>
           <span>
             Your browser/hosting environment may be blocking YouTube's embedded player.
-            The FITFUEL page is still open and no automatic redirect is performed.
+            The FITWITHME page is still open and no automatic redirect is performed.
           </span>
         </div>
       </div>
@@ -1135,7 +1192,7 @@ footer{border-top:1px solid #252525;background:#0d0d0d;padding:44px 0;color:#777
             <strong>🎵 Spotify Workout Music</strong>
             <p style="color:#777;font-size:11px;margin:5px 0 9px">
               Scroll through the workout songs below and select any track. The selected song opens
-              directly in the Spotify player inside FITFUEL.
+              directly in the Spotify player inside FITWITHME.
             </p>
             <div class="spotify-now-playing" id="spotifyNowPlaying">No song selected</div>
             <div class="spotify-song-picker" id="spotifySongPicker"></div>
@@ -1188,11 +1245,11 @@ window.addEventListener("load",()=>{
 /* =========================================================
    STORAGE + STATE
    ========================================================= */
-let userPlan = JSON.parse(localStorage.getItem("fitfuelUser") || "null") || {};
-let cart = JSON.parse(localStorage.getItem("fitfuelCart") || "[]");
-let progress = JSON.parse(localStorage.getItem("fitfuelProgress") || "[]");
-let completedExercises = JSON.parse(localStorage.getItem("fitfuelCompleted") || "{}");
-let completedMeals = JSON.parse(localStorage.getItem("fitfuelMeals") || "{}");
+let userPlan = JSON.parse(localStorage.getItem("fitwithmeUser") || "null") || {};
+let cart = JSON.parse(localStorage.getItem("fitwithmeCart") || "[]");
+let progress = JSON.parse(localStorage.getItem("fitwithmeProgress") || "[]");
+let completedExercises = JSON.parse(localStorage.getItem("fitwithmeCompleted") || "{}");
+let completedMeals = JSON.parse(localStorage.getItem("fitwithmeMeals") || "{}");
 
 let timerInterval = null;
 let timerDuration = 60;
@@ -1476,37 +1533,47 @@ function toast(message){
    ========================================================= */
 function generatePlan(){
   const name=(document.getElementById("name").value||"Athlete").trim();
-  const age=Number(document.getElementById("age").value)||21;
+  const age=Number(document.getElementById("age").value);
   const gender=document.getElementById("gender").value;
-  const height=Number(document.getElementById("height").value)||170;
-  const weight=Number(document.getElementById("weight").value)||60;
+  const height=Number(document.getElementById("height").value);
+  const weight=Number(document.getElementById("weight").value);
   const goal=document.getElementById("goal").value;
   const days=Number(document.getElementById("days").value);
   const diet=document.getElementById("dietType").value;
+  const activity=Number(document.getElementById("activityLevel").value);
+
+  if(!Number.isFinite(age)||!Number.isFinite(height)||!Number.isFinite(weight)||age<18||age>100||height<120||height>230||weight<30||weight>300){
+    toast("Enter a valid adult age (18+), height and weight to calculate an estimate.");
+    return;
+  }
 
   let bmr=gender==="male"
     ? (10*weight)+(6.25*height)-(5*age)+5
     : (10*weight)+(6.25*height)-(5*age)-161;
 
-  let calories=bmr*1.55;
-  if(goal==="muscle") calories+=300;
-  if(goal==="fatloss") calories-=400;
-  if(goal==="strength") calories+=200;
+  // Mifflin–St Jeor BMR, then a user-selected activity factor. This is an estimate,
+  // not a diagnosis or a substitute for an individual clinical assessment.
+  const maintenance=bmr*activity;
+  const goalMultiplier={muscle:1.10,fatloss:0.85,strength:1.05,maintain:1}[goal]||1;
+  const calories=maintenance*goalMultiplier;
 
-  let protein=(goal==="muscle"||goal==="strength") ? weight*1.8 : weight*1.6;
-  let carbs=(calories*.45)/4;
-  let fats=(calories*.25)/9;
+  // 1.6 g/kg/day is a practical evidence-based target for healthy adults doing
+  // resistance training. Remaining energy is allocated after protein and 30% fat.
+  const protein=weight*1.6;
+  const fats=(calories*.30)/9;
+  const carbs=Math.max(0,(calories-(protein*4)-(fats*9))/4);
 
   userPlan={
-    name,age,gender,height,weight,goal,days,diet,
+    name,age,gender,height,weight,goal,days,diet,activity,
     bmr:Math.round(bmr),
+    maintenance:Math.round(maintenance),
     calories:Math.round(calories),
     protein:Math.round(protein),
     carbs:Math.round(carbs),
     fats:Math.round(fats)
   };
 
-  localStorage.setItem("fitfuelUser",JSON.stringify(userPlan));
+  localStorage.setItem("fitwithmeUser",JSON.stringify(userPlan));
 
   document.getElementById("planResult").style.display="block";
   document.getElementById("planResult").innerHTML=`
@@ -1520,13 +1587,19 @@ function generatePlan(){
 
     <div class="statgrid">
       <div class="stat"><strong>${Math.round(bmr)}</strong>BMR</div>
-      <div class="stat"><strong>${Math.round(calories)}</strong>Calories</div>
+      <div class="stat"><strong>${Math.round(maintenance)}</strong>Maintenance kcal</div>
+      <div class="stat"><strong>${Math.round(calories)}</strong>Goal kcal</div>
       <div class="stat"><strong>${Math.round(protein)}g</strong>Protein</div>
       <div class="stat"><strong>${Math.round(carbs)}g</strong>Carbs</div>
       <div class="stat"><strong>${Math.round(fats)}g</strong>Fat</div>
     </div>
 
     <div class="profile-note">
+      <strong style="color:#ddd">Estimate, not a prescription:</strong>
+      BMR uses Mifflin–St Jeor and your selected activity level. Reassess using your
+      weight trend, appetite and training performance after 2–4 weeks. Pregnancy,
+      breastfeeding, diabetes, kidney disease, eating-disorder history or other medical
+      conditions need individual guidance from a registered dietitian or clinician.<br><br>
       <strong style="color:#ddd">Store personalization:</strong>
       cycling/endurance hydration and energy products are shown for every member.
       The protein recommendation is changed to match the selected diet.
@@ -1629,7 +1702,7 @@ function generateWorkout(days,goal){
 function toggleExercise(encodedKey){
   const key=decodeURIComponent(encodedKey);
   completedExercises[key]=!completedExercises[key];
-  localStorage.setItem("fitfuelCompleted",JSON.stringify(completedExercises));
+  localStorage.setItem("fitwithmeCompleted",JSON.stringify(completedExercises));
   generateWorkout(Number(userPlan.days)||5,userPlan.goal||"muscle");
 }
 
@@ -1637,44 +1710,67 @@ function toggleExercise(encodedKey){
    DIET
    ========================================================= */
 function generateDiet(plan){
+  if(!Number.isFinite(Number(plan?.calories)) || Number(plan.calories)<=0){
+    document.getElementById("dietPlan").innerHTML=
+      `<div class="empty">Enter valid adult profile details and generate your plan to see portion sizes.</div>`;
+    return;
+  }
+  /* Values are approximate per 100 g (or 100 ml for milk), before added sauces.
+     Rice, dal, beans, chicken and vegetables below are COOKED edible weights. */
+  const food=(name,amount,unit,kcalPer100,proteinPer100)=>({name,amount,unit,kcalPer100,proteinPer100});
   let foods;
 
   if(plan.diet==="Vegetarian"){
     foods=[
-      ["Breakfast","Oats + Milk + Banana",500,20],
-      ["Snack","Peanuts + Fruit",300,12],
-      ["Lunch","Rice + Dal + Curd + Vegetables",650,25],
-      ["Snack","Paneer Sandwich",400,25],
-      ["Dinner","Roti + Paneer + Vegetables",600,30]
+      ["Breakfast",[food("oats",50,"g",379,13.2),food("milk",250,"ml",42,3.4),food("banana",100,"g",89,1.1)]],
+      ["Snack",[food("peanuts",20,"g",567,25.8),food("apple",150,"g",52,0.3)]],
+      ["Lunch",[food("white rice, cooked",150,"g",130,2.4),food("dal, cooked",180,"g",116,7.5),food("plain curd",150,"g",61,3.5),food("mixed vegetables",200,"g",50,2.5),food("cooking oil",5,"g",884,0)]],
+      ["Snack",[food("plain curd",200,"g",61,3.5),food("roasted chana",30,"g",370,20),food("banana",100,"g",89,1.1)]],
+      ["Dinner",[food("whole-wheat roti (from atta)",80,"g",340,12.5),food("paneer",75,"g",265,18.3),food("mixed vegetables",200,"g",50,2.5)]]
     ];
   }else if(plan.diet==="Vegan"){
     foods=[
-      ["Breakfast","Oats + Soy Milk + Banana",500,22],
-      ["Snack","Peanuts + Fruit",300,12],
-      ["Lunch","Rice + Dal + Vegetables",650,25],
-      ["Snack","Plant Protein + Banana",300,25],
-      ["Dinner","Roti + Tofu + Vegetables",600,30]
+      ["Breakfast",[food("oats",50,"g",379,13.2),food("unsweetened soy milk",250,"ml",44,3.3),food("banana",100,"g",89,1.1)]],
+      ["Snack",[food("peanuts",20,"g",567,25.8),food("apple",150,"g",52,0.3)]],
+      ["Lunch",[food("white rice, cooked",150,"g",130,2.4),food("dal, cooked",180,"g",116,7.5),food("mixed vegetables",200,"g",50,2.5),food("cooking oil",5,"g",884,0)]],
+      ["Snack",[food("roasted chana",40,"g",370,20),food("banana",100,"g",89,1.1),food("unsweetened soy milk",200,"ml",44,3.3)]],
+      ["Dinner",[food("whole-wheat roti (from atta)",80,"g",340,12.5),food("firm tofu",150,"g",144,15.7),food("mixed vegetables",200,"g",50,2.5),food("cooking oil",5,"g",884,0)]]
     ];
   }else if(plan.diet==="Eggitarian"){
     foods=[
-      ["Breakfast","Oats + Milk + Banana + Eggs",550,30],
-      ["Snack","Peanuts + Fruit",300,12],
-      ["Lunch","Rice + Eggs + Dal + Vegetables",650,30],
-      ["Snack","Whey Protein + Banana",300,27],
-      ["Dinner","Roti + Eggs + Curd + Vegetables",600,35]
+      ["Breakfast",[food("oats",50,"g",379,13.2),food("milk",250,"ml",42,3.4),food("banana",100,"g",89,1.1),food("eggs (about 2 large)",100,"g",143,12.6)]],
+      ["Snack",[food("peanuts",20,"g",567,25.8),food("apple",150,"g",52,0.3)]],
+      ["Lunch",[food("white rice, cooked",150,"g",130,2.4),food("eggs (about 3 large)",150,"g",143,12.6),food("dal, cooked",150,"g",116,7.5),food("mixed vegetables",200,"g",50,2.5),food("cooking oil",5,"g",884,0)]],
+      ["Snack",[food("plain curd",200,"g",61,3.5),food("roasted chana",30,"g",370,20),food("banana",100,"g",89,1.1)]],
+      ["Dinner",[food("whole-wheat roti (from atta)",80,"g",340,12.5),food("eggs (about 3 large)",150,"g",143,12.6),food("mixed vegetables",200,"g",50,2.5),food("plain curd",100,"g",61,3.5)]]
     ];
   }else{
     foods=[
-      ["Breakfast","Oats + Milk + Banana + Eggs",550,30],
-      ["Snack","Peanuts + Fruit",300,12],
-      ["Lunch","Rice + Chicken + Vegetables",700,45],
-      ["Snack","Whey Protein + Banana",300,27],
-      ["Dinner","Rice/Roti + Chicken + Curd",650,40]
+      ["Breakfast",[food("oats",50,"g",379,13.2),food("milk",250,"ml",42,3.4),food("banana",100,"g",89,1.1),food("eggs (about 2 large)",100,"g",143,12.6)]],
+      ["Snack",[food("peanuts",20,"g",567,25.8),food("apple",150,"g",52,0.3)]],
+      ["Lunch",[food("white rice, cooked",150,"g",130,2.4),food("skinless chicken breast, cooked",120,"g",165,31),food("mixed vegetables",200,"g",50,2.5),food("cooking oil",5,"g",884,0)]],
+      ["Snack",[food("plain curd",200,"g",61,3.5),food("roasted chana",30,"g",370,20),food("banana",100,"g",89,1.1)]],
+      ["Dinner",[food("whole-wheat roti (from atta)",80,"g",340,12.5),food("skinless chicken breast, cooked",120,"g",165,31),food("dal, cooked",150,"g",116,7.5),food("mixed vegetables",200,"g",50,2.5),food("cooking oil",5,"g",884,0)]]
     ];
   }
 
-  let totalCalories=foods.reduce((sum,f)=>sum+f[2],0);
-  let totalProtein=foods.reduce((sum,f)=>sum+f[3],0);
+  const baseCalories=foods.flatMap(f=>f[1]).reduce((sum,item)=>sum+(item.amount*item.kcalPer100/100),0);
+  // Scale all displayed portions to the goal; guard against impractically small/large plates.
+  const scale=Math.max(.70,Math.min(1.40,plan.calories/baseCalories));
+  foods=foods.map(([meal,items])=>[meal,items.map(item=>({...item,amount:Math.max(5,Math.round(item.amount*scale/5)*5)}))]);
+  const mealTotals=foods.map(([meal,items])=>({
+    meal,items,
+    calories:items.reduce((sum,item)=>sum+(item.amount*item.kcalPer100/100),0),
+    protein:items.reduce((sum,item)=>sum+(item.amount*item.proteinPer100/100),0)
+  }));
+  const totalCalories=mealTotals.reduce((sum,meal)=>sum+meal.calories,0);
+  const totalProtein=mealTotals.reduce((sum,meal)=>sum+meal.protein,0);
+  const targetCalories=Math.round(Number(plan.calories)||0);
+  const targetProtein=Math.round(Number(plan.protein)||0);
+  const targetCarbs=Math.round(Number(plan.carbs)||0);
+  const targetFats=Math.round(Number(plan.fats)||0);
+  const listedCalories=Math.round(totalCalories);
+  const listedProtein=Math.round(totalProtein);
 
   let html=`
     <div class="diet-head">
@@ -1682,29 +1778,29 @@ function generateDiet(plan){
         <h2>Today's Nutrition Plan</h2>
         <p style="color:#888;font-size:12px">${escapeHTML(plan.diet)} meal structure</p>
       </div>
-      <span class="badge">${Math.round(totalCalories)} kcal listed</span>
+      <span class="badge">${listedCalories} kcal listed</span>
     </div>
 
-    <div class="statgrid">
-      <div class="stat"><strong>${plan.calories}</strong>Target kcal</div>
-      <div class="stat"><strong>${plan.protein}g</strong>Protein target</div>
-      <div class="stat"><strong>${plan.carbs}g</strong>Carbs target</div>
-      <div class="stat"><strong>${plan.fats}g</strong>Fat target</div>
-      <div class="stat"><strong>${totalProtein}g</strong>Listed protein</div>
+    <div class="statgrid diet-summary">
+      <div class="stat"><strong>${targetCalories}</strong>Target kcal</div>
+      <div class="stat"><strong>${targetProtein}g</strong>Protein target</div>
+      <div class="stat"><strong>${targetCarbs}g</strong>Carbs target</div>
+      <div class="stat"><strong>${targetFats}g</strong>Fat target</div>
+      <div class="stat"><strong>${listedProtein}g</strong>Listed protein</div>
     </div>
 
     <div style="margin-top:17px">
-      ${foods.map((f,index)=>{
-        const key=`${plan.name||"member"}-${f[0]}-${index}`;
+      ${mealTotals.map((meal,index)=>{
+        const key=`${plan.name||"member"}-${meal.meal}-${index}`;
         const done=completedMeals[key];
         return `
           <div class="food ${done?"done":""}" onclick="toggleMeal('${encodeURIComponent(key)}')">
             <div class="food-name">
-              <strong>${f[0]}</strong>
-              <span>${f[1]}</span>
+              <strong>${meal.meal}</strong>
+              <span>${meal.items.map(item=>`${item.amount}${item.unit} ${item.name}: ${Math.round(item.amount*item.kcalPer100/100)} kcal • ${(item.amount*item.proteinPer100/100).toFixed(1)}g protein`).join(" | ")}</span>
             </div>
             <div class="food-right">
-              ${f[2]} kcal<br><span>${f[3]}g protein</span>
+              ${Math.round(meal.calories)} kcal<br><span>${Math.round(meal.protein)}g protein</span>
             </div>
           </div>
         `;
@@ -1712,7 +1808,15 @@ function generateDiet(plan){
     </div>
 
     <div class="profile-note">
-      <strong style="color:#ddd">Tap a meal</strong> to mark it complete for the current member.
+      <strong style="color:#ddd">How to read this:</strong> all quantities are cooked/edible
+      weights except atta (the dry flour used for roti); milk is in ml. Calories can change with
+      recipe, oil, brand and draining. Values are rounded reference estimates, not medical treatment.
+      <br><br><strong style="color:#ddd">Sources:</strong>
+      <a href="https://www.niddk.nih.gov/bwp" target="_blank" rel="noopener noreferrer">NIDDK Body Weight Planner</a> for the role of age, sex, size and activity in calorie estimates;
+      <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noopener noreferrer">USDA FoodData Central</a> food-composition data;
+      <a href="https://www.nin.res.in/dietaryguidelines/pdfjs/locale/DGI24thJune2024fin.pdf" target="_blank" rel="noopener noreferrer">ICMR–NIN Dietary Guidelines for Indians (2024)</a>;
+      and a <a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" target="_blank" rel="noopener noreferrer">resistance-training protein meta-analysis</a>
+      supporting about 1.6 g/kg/day in healthy adults. <strong style="color:#ddd">Tap a meal</strong> to mark it complete.
     </div>
   `;
 
@@ -1722,7 +1826,7 @@ function generateDiet(plan){
 function toggleMeal(encodedKey){
   const key=decodeURIComponent(encodedKey);
   completedMeals[key]=!completedMeals[key];
-  localStorage.setItem("fitfuelMeals",JSON.stringify(completedMeals));
+  localStorage.setItem("fitwithmeMeals",JSON.stringify(completedMeals));
   generateDiet(userPlan);
 }
 
@@ -2184,7 +2288,7 @@ function saveProgress(){
     date:new Date().toLocaleDateString()
   });
 
-  localStorage.setItem("fitfuelProgress",JSON.stringify(progress));
+  localStorage.setItem("fitwithmeProgress",JSON.stringify(progress));
   showProgress();
 
   document.getElementById("progressWeight").value="";
@@ -2197,7 +2301,7 @@ function saveProgress(){
 
 function deleteProgress(index){
   progress.splice(index,1);
-  localStorage.setItem("fitfuelProgress",JSON.stringify(progress));
+  localStorage.setItem("fitwithmeProgress",JSON.stringify(progress));
   showProgress();
 }
 
@@ -2208,7 +2312,7 @@ function clearProgress(){
   }
   if(!confirm("Clear all progress history?")) return;
   progress=[];
-  localStorage.setItem("fitfuelProgress","[]");
+  localStorage.setItem("fitwithmeProgress","[]");
   showProgress();
   toast("Progress history cleared.");
 }
@@ -2413,7 +2517,7 @@ function addReferralToCart(encodedId,encodedName){
   const name=decodeURIComponent(encodedName);
 
   /*
-    This is a FITFUEL shortlist/cart, not a fake MuscleBlaze checkout.
+    This is a FITWITHME shortlist/cart, not a fake MuscleBlaze checkout.
     The actual purchase is completed on the official MuscleBlaze page.
   */
   const exists=cart.find(x=>x.id===id);
@@ -2423,10 +2527,10 @@ function addReferralToCart(encodedId,encodedName){
     cart.push({id,name,price:0,qty:1});
   }
 
-  localStorage.setItem("fitfuelCart",JSON.stringify(cart));
+  localStorage.setItem("fitwithmeCart",JSON.stringify(cart));
   updateCart();
   toggleCart();
-  toast(`${name} added to your FITFUEL shortlist.`);
+  toast(`${name} added to your FITWITHME shortlist.`);
 }
 
 /* =========================================================
@@ -2434,7 +2538,7 @@ function addReferralToCart(encodedId,encodedName){
    ========================================================= */
 function removeCart(index){
   cart.splice(index,1);
-  localStorage.setItem("fitfuelCart",JSON.stringify(cart));
+  localStorage.setItem("fitwithmeCart",JSON.stringify(cart));
   updateCart();
 }
 
@@ -2442,7 +2546,7 @@ function updateCart(){
   const items=document.getElementById("cartItems");
 
   if(!cart.length){
-    items.innerHTML=`<div class="empty">Your FITFUEL shortlist is empty.</div>`;
+    items.innerHTML=`<div class="empty">Your FITWITHME shortlist is empty.</div>`;
   }else{
     items.innerHTML=cart.map((item,index)=>`
       <div class="cart-item">
@@ -2472,7 +2576,7 @@ function checkout(){
   }
 
   /*
-    Open the official MuscleBlaze store rather than pretending FITFUEL
+    Open the official MuscleBlaze store rather than pretending FITWITHME
     processes MuscleBlaze payments.
   */
   window.open(mbLinks.brand,"_blank","noopener,noreferrer");
@@ -2482,7 +2586,7 @@ function checkout(){
    PROFILE / RESET
    ========================================================= */
 function clearProfile(){
-  localStorage.removeItem("fitfuelUser");
+  localStorage.removeItem("fitwithmeUser");
   userPlan={};
 
   ["name","age","height","weight","progressWeight","chest","waist","arms"].forEach(id=>{
@@ -2493,6 +2597,7 @@ function clearProfile(){
   document.getElementById("gender").value="male";
   document.getElementById("goal").value="muscle";
   document.getElementById("days").value="5";
+  document.getElementById("activityLevel").value="1.50";
   document.getElementById("dietType").value="Non-Vegetarian";
 
   document.getElementById("planResult").style.display="none";
@@ -2509,7 +2614,7 @@ function clearProfile(){
 }
 
 function loadUser(){
-  const saved=JSON.parse(localStorage.getItem("fitfuelUser")||"null");
+  const saved=JSON.parse(localStorage.getItem("fitwithmeUser")||"null");
   if(!saved) return;
 
   userPlan=saved;
@@ -2521,6 +2626,7 @@ function loadUser(){
   document.getElementById("weight").value=saved.weight||"";
   document.getElementById("goal").value=saved.goal||"muscle";
   document.getElementById("days").value=saved.days||5;
+  document.getElementById("activityLevel").value=saved.activity||"1.50";
   document.getElementById("dietType").value=saved.diet||"Non-Vegetarian";
 
   generatePlan();
@@ -2529,6 +2635,24 @@ function loadUser(){
 /* =========================================================
    INITIALIZE
    ========================================================= */
+function setupRevealAnimations(){
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const sections=[...document.querySelectorAll("main > section")];
+  if(!sections.length || !("IntersectionObserver" in window)) return;
+  document.body.classList.add("reveal-ready");
+  sections.forEach(section=>section.classList.add("reveal"));
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12,rootMargin:"0px 0px -30px"});
+  sections.forEach(section=>observer.observe(section));
+}
+
+setupRevealAnimations();
 renderExerciseLibrary();
 renderStore();
 updateCart();
@@ -2543,7 +2667,7 @@ if(userPlan && userPlan.name){
 
 
 <!--
-  FITFUEL GOOGLE ADSENSE
+  FITWITHME GOOGLE ADSENSE
   Publisher ID: ca-pub-1739569851783947
   The AdSense loader is included in <head>.
   Responsive Auto Format ad units are placed between major sections.
